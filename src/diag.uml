@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="600.4851334006951" y="476.47401045596973">But</node>
+    <node x="220.62594833154654" y="366.091561515309">Salle</node>
+    <node x="249.56724567752602" y="133.2306118528669">Capteur</node>
+    <node x="145.94819916855235" y="607.6560268653716">AmasNeoCampus</node>
+    <node x="98.21910395661567" y="137.1306777687355">Dispositif</node>
+    <node x="36.07094470946231" y="0.0">Metrique</node>
+    <node x="0.0" y="250.00739919781597">Effecteur</node>
+    <node x="396.4635615478437" y="488.9734147994154">AgentNeoCampus</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="AgentNeoCampus" target="But">
+      <point x="-0.3419349259816329" y="-4.486990138878614" />
+      <point x="-0.3419349259816613" y="-4.486990138878614" />
+    </edge>
+    <edge source="Salle" target="Dispositif">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Dispositif" target="Metrique">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="AmasNeoCampus" target="Salle">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="AgentNeoCampus" target="Salle">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="AgentNeoCampus" target="AmasNeoCampus">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Effecteur" target="Dispositif">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Capteur" target="Dispositif">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.9056316590563166" x="333.5" y="318.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
