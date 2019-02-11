@@ -1,5 +1,7 @@
 import fr.irit.smac.amak.Amas;
 import fr.irit.smac.amak.Scheduling;
+import strategies.StrategieConfo;
+import strategies.StrategieEco;
 
 public class AmasNeoCampus extends Amas<Salle> {
 
@@ -10,8 +12,8 @@ public class AmasNeoCampus extends Amas<Salle> {
     @Override
     protected void onInitialAgentsCreation() {
         for (Metrique m : Metrique.values()) {
-            AgentNeoCampus ecoAgent = new AgentNeoCampus(this, But.ECONOMIE, m);
-            AgentNeoCampus confoAgent = new AgentNeoCampus(this, But.CONFORT, m);
+            AgentNeoCampus ecoAgent = new AgentNeoCampus(this, new StrategieEco(), m);
+            AgentNeoCampus confoAgent = new AgentNeoCampus(this, new StrategieConfo(), m);
 
             ecoAgent.addNeighbor(confoAgent);
             confoAgent.addNeighbor(ecoAgent);

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Amak">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/AmakFramework-standalone.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/AmakFramework-standalone.jar!/" />
+    </SOURCES>
+  </library>
+</component>

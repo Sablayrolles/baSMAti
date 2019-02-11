@@ -1,21 +1,16 @@
 import fr.irit.smac.amak.Agent;
-
-import java.util.List;
+import strategies.StrategieAgent;
 
 public class AgentNeoCampus extends Agent<AmasNeoCampus, Salle> {
 
-    private But but;
+    private Salle salle;
     private Metrique metrique;
+    private StrategieAgent strategie;
 
-    private List<Capteur> capteurs;
-    private List<Effecteur> effecteurs;
-
-    public AgentNeoCampus(AmasNeoCampus amas, But but, Metrique metrique) {
+    public AgentNeoCampus(AmasNeoCampus amas, StrategieAgent strategie, Metrique metrique) {
         super(amas);
-        this.but = but;
+        this.salle = getEnvironment();
+        this.strategie = strategie;
         this.metrique = metrique;
-
-        this.capteurs = getEnvironment().getCapteurs(this.metrique);
-        this.effecteurs = getEnvironment().getEffecteurs(this.metrique);
     }
 }

@@ -3,42 +3,53 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="600.4851334006951" y="476.47401045596973">But</node>
-    <node x="220.62594833154654" y="366.091561515309">Salle</node>
-    <node x="249.56724567752602" y="133.2306118528669">Capteur</node>
-    <node x="145.94819916855235" y="607.6560268653716">AmasNeoCampus</node>
-    <node x="98.21910395661567" y="137.1306777687355">Dispositif</node>
-    <node x="36.07094470946231" y="0.0">Metrique</node>
-    <node x="0.0" y="250.00739919781597">Effecteur</node>
-    <node x="396.4635615478437" y="488.9734147994154">AgentNeoCampus</node>
+    <node x="393.0" y="0.0">But</node>
+    <node x="570.0" y="360.0">Salle</node>
+    <node x="640.0" y="474.0">Capteur</node>
+    <node x="439.0" y="214.0">AmasNeoCampus</node>
+    <node x="819.0" y="426.0">Dispositif</node>
+    <node x="173.0" y="600.0">StrategieAgent</node>
+    <node x="633.0" y="240.0">Metrique</node>
+    <node x="641.0" y="590.0">Effecteur</node>
+    <node x="0.0" y="550.0">StrategieEco</node>
+    <node x="146.0" y="787.0">StrategieConfo</node>
+    <node x="324.0" y="420.0">AgentNeoCampus</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="AgentNeoCampus" target="But">
-      <point x="-0.3419349259816329" y="-4.486990138878614" />
-      <point x="-0.3419349259816613" y="-4.486990138878614" />
+    <edge source="StrategieConfo" target="StrategieAgent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="StrategieEco" target="StrategieAgent">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
     </edge>
     <edge source="Salle" target="Dispositif">
       <point x="0.0" y="0.0" />
       <point x="0.0" y="0.0" />
     </edge>
     <edge source="Dispositif" target="Metrique">
+      <point x="-3.3063440485378237" y="3.7507451303305572" />
+      <point x="-3.3063440485378237" y="3.7507451303305572" />
+    </edge>
+    <edge source="AmasNeoCampus" target="AgentNeoCampus">
       <point x="0.0" y="0.0" />
       <point x="0.0" y="0.0" />
     </edge>
-    <edge source="AmasNeoCampus" target="Salle">
+    <edge source="AmasNeoCampus" target="Metrique">
       <point x="0.0" y="0.0" />
       <point x="0.0" y="0.0" />
     </edge>
-    <edge source="AgentNeoCampus" target="Salle">
+    <edge source="AmasNeoCampus" target="But">
       <point x="0.0" y="0.0" />
       <point x="0.0" y="0.0" />
     </edge>
-    <edge source="AgentNeoCampus" target="AmasNeoCampus">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+    <edge source="AgentNeoCampus" target="Metrique">
+      <point x="0.0" y="6.282635189507658" />
+      <point x="8.25762199413009" y="0.0" />
     </edge>
-    <edge source="Effecteur" target="Dispositif">
+    <edge source="AgentNeoCampus" target="Capteur">
       <point x="0.0" y="0.0" />
       <point x="0.0" y="0.0" />
     </edge>
@@ -46,10 +57,50 @@
       <point x="0.0" y="0.0" />
       <point x="0.0" y="0.0" />
     </edge>
+    <edge source="AgentNeoCampus" target="AmasNeoCampus">
+      <point x="-10.5557756702196" y="-1.4210854715202004E-14" />
+      <point x="-10.555775670219589" y="0.0" />
+    </edge>
+    <edge source="Salle" target="Effecteur">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Salle" target="Metrique">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="AmasNeoCampus" target="Salle">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Salle" target="Capteur">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="AgentNeoCampus" target="Salle">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Effecteur" target="Dispositif">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="AgentNeoCampus" target="StrategieAgent">
+      <point x="2.905180532025136" y="4.069388906991094" />
+      <point x="2.9051805320251276" y="4.069388906991094" />
+    </edge>
+    <edge source="AgentNeoCampus" target="Effecteur">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.9056316590563166" x="333.5" y="318.5" />
-  <SelectedNodes />
-  <Categories />
+  <settings layout="Hierarchic Group" zoom="1.0" x="334.0" y="439.0" />
+  <SelectedNodes>
+    <node>AgentNeoCampus</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>
