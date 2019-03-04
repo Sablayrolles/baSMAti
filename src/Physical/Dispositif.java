@@ -1,3 +1,7 @@
+package Physical;
+
+import Enumerations.Metrique;
+
 public abstract class Dispositif {
 
     private String identifiant;
