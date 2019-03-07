@@ -59,8 +59,28 @@ public class testMQTT implements MqttCallback{
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         //System.out.println(mqttMessage);
         JSONObject obj = new JSONObject(mqttMessage.toString());
-        System.out.println(obj.toString());
-        System.out.println(obj.getString("subID"));
+        //System.out.println(obj.toString());
+
+        switch (obj.getString("subID")){
+            case "ilot1":
+                if(obj.getString("value_units").equals("lux"))
+                    System.out.println("ilot1 : " + obj.getInt("value"));
+            break;
+            case "ilot2":
+                if(obj.getString("value_units").equals("lux"))
+                    System.out.println("ilot2 : " + obj.getInt("value"));
+                //else if(obj.getString("type").equals("presence"))
+                    //System.out.println("presence : " + obj.getInt("value"));
+            break;
+            case "ilot3":
+                if(obj.getString("value_units").equals("lux"))
+                    System.out.println("ilot3 : " + obj.getInt("value"));
+            break;
+            case "ouest":
+                if(obj.getString("unitID").equals("outside") && obj.getString("value_units").equals("w/m2"))
+                    System.out.println("exterieur : " + obj.getInt("value"));
+            break;
+        }
     }
 
     @Override
