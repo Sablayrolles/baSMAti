@@ -38,7 +38,7 @@ public class SalleEnv extends Environment {
                 .collect(Collectors.toList());
     }
 
-    public List<Effecteur> getEffecteurs(Metrique metrique) {
+    public List<Effecteur> getEffecteur(Metrique metrique,String id) {
         // Met la liste dispositifs sous forme de stream, filtre pour ne garder que les effecteurs de la metrique
         // utilise un map pour cast le résultat en effecteur
         // collect transforme le stream en liste
