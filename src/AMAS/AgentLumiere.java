@@ -94,7 +94,7 @@ public class AgentLumiere extends AgentNeoCampus{
                 || (state.getIsBrightOutside() && state.getIsBrightInside() && state.getIsOn());
     }
     private boolean isTurnOn(){
-        // table de karnaugh pour les cas needTurnOn = 1
+        // table de karnaugh pour les cas needTurnOn = 1 y = A!C!D
         return (state.getIsPresence() && !state.getIsBrightInside() && !state.getIsOn());
     }
 
