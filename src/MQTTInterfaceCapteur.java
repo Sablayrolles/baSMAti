@@ -11,4 +11,8 @@ public class MQTTInterfaceCapteur {
             this.stock.put(type, new StockageUnit(this.BUFFERSIZE));
         }
     }
+
+    public ArrayList<Float> getValuesOfType(String type){
+        return this.stock.get(type).getValues();
+    }
 }
