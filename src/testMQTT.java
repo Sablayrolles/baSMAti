@@ -19,7 +19,7 @@ public class testMQTT implements MqttCallback{
 
     public void run() {
 
-        String clientId     = "JavaSample";
+        String clientId = "JavaSample";
         MemoryPersistence persistence = new MemoryPersistence();
 
         try {
@@ -62,24 +62,28 @@ public class testMQTT implements MqttCallback{
         //System.out.println(obj.toString());
 
         switch (obj.getString("subID")){
+            // Reception des données des capteurs de l'ilot 1
             case "ilot1":
                 if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux"))
                     System.out.println("ilot1 lux : " + obj.getInt("value"));
                 else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence"))
                     System.out.println("presence 1 : " + obj.getInt("value"));
             break;
+            // Reception des données des capteurs de l'ilot 2
             case "ilot2":
                 if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux"))
                     System.out.println("ilot2 lux : " + obj.getInt("value"));
                 else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence"))
                     System.out.println("presence 2 : " + obj.getInt("value"));
             break;
+            // Reception des données des capteurs de l'ilot 3
             case "ilot3":
                 if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux"))
                     System.out.println("ilot3 lux : " + obj.getInt("value"));
                 else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence"))
                     System.out.println("presence 3 : " + obj.getInt("value"));
             break;
+            // Reception des données du capteur de luminosité exterieur
             case "ouest":
                 // Conversion de la luminosité de W/m² en lux
                 if(obj.getString("unitID").equals("outside") && obj.getString("value_units").equals("w/m2"))

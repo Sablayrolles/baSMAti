@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-
 public class InterfaceAgentCapteur {
     private MQTTInterfaceCapteur inter;
 
-    public InterfaceAgentCapteur(ArrayList<String> types) {
+    public InterfaceAgentCapteur(String[] types) {
         /* types = ["presence", "luminosite", "luminosite_ext"]*/
         this.inter = new MQTTInterfaceCapteur(types);
     }
@@ -29,7 +27,7 @@ public class InterfaceAgentCapteur {
             }
         }
 
-        if(s == 0) {
+        if(s != 0) {
             return m / (float) s;
         }else{
             return -1;
@@ -47,7 +45,7 @@ public class InterfaceAgentCapteur {
             }
         }
 
-        if(s == 0) {
+        if(s != 0) {
             return m / (float) s;
         }else{
             return -1;
