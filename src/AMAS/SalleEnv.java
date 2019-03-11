@@ -1,7 +1,6 @@
 package AMAS;
 
 import Enumerations.Metrique;
-import Physical.Capteur;
 import Physical.Dispositif;
 import Physical.Effecteur;
 import fr.irit.smac.amak.Environment;
@@ -28,7 +27,7 @@ public class SalleEnv extends Environment {
         dispositifs = new ArrayList<>();
         // TODO Ajouter tous les capteurs de la salle
     }
-
+    /*
     public List<Capteur> getCapteurs(Metrique metrique) {
         // Met la liste dispositifs sous forme de stream, filtre pour ne garder que les capteur de la metrique
         // utilise un map pour cast le résultat en capteur
@@ -37,7 +36,7 @@ public class SalleEnv extends Environment {
                 .map((d) -> (Capteur) d)
                 .collect(Collectors.toList());
     }
-
+    */
     public List<Effecteur> getEffecteur(Metrique metrique,String id) {
         // Met la liste dispositifs sous forme de stream, filtre pour ne garder que les effecteurs de la metrique
         // utilise un map pour cast le résultat en effecteur
