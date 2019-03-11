@@ -6,6 +6,7 @@ import Physical.StateLumiere;
 public class AgentLumiere extends AgentNeoCampus{
     private StateLumiere state;
     private StateLumiere lastState;
+    private StateLumiere stateRollback;
 
     public AgentLumiere(AmasNeoCampus amas, Metrique metrique) {
         super(amas, metrique);
@@ -100,9 +101,19 @@ public class AgentLumiere extends AgentNeoCampus{
 
     private void decision(){
         if(isTurnOn()){
+            // on part du principe qu'il n'y a pas besoin ici de tester si on boucle, car on veut dans le pire des cas
+            // que les lumières soient allumées
+
             // critique, demander a l'interface d'allumer notre lampe
         } else if(isTurnOff()){
-            // critique, demander a l'interface dd'eteindre notre lampe
+            StateLumiere nextState = new StateLumiere(state);
+            nextState.toggleIsOn();
+            if(!nextState.compareStates(this.lastState)) {
+                // critique, demander a l'interface d'eteindre notre lampe
+            } else {
+                // on détecte un cas de bouclage : on rollback la valeur de lastState
+                lastState = new StateLumiere(stateRollback);
+            }
         }
     }
 
