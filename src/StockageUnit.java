@@ -2,17 +2,16 @@ import java.util.ArrayList;
 
 public class StockageUnit {
     private int indice;
-    private int BUFFERSIZE;
+    private static final int BUFFERSIZE = 15;
     private ArrayList<Float> values;
 
-    public StockageUnit(int BUFFERSIZE) {
+    public StockageUnit() {
         this.indice = 0;
-        this.BUFFERSIZE = BUFFERSIZE;
         this.values = new ArrayList<Float>(BUFFERSIZE);
     }
 
     private void incrIndice(){
-        this.indice = (this.indice + 1) % this.BUFFERSIZE;
+        this.indice = (this.indice + 1) % BUFFERSIZE;
     }
 
     public void setValue(float val){

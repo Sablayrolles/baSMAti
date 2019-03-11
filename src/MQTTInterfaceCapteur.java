@@ -1,115 +1,19 @@
-import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ArrayList;
 
-public class MQTTInterfaceCapteur implements MqttCallback{
 
-    private MqttClient client;
-    private static final String CONNECTION_URL = "tcp://neocampus.univ-tlse3.fr:1883";
-    private static final String SUBSCRIPTION = "u4/302/#";
-    private static final String USERNAME = "m2dc";
-    private static final String PASSWORD = "m2dc;18";
-
+public class MQTTInterfaceCapteur {
     private HashMap<String, StockageUnit> stock;
     private static final int BUFFERSIZE = 15;
 
     public MQTTInterfaceCapteur(String[] types) {
         this.stock = new HashMap<String, StockageUnit>();
         for(String type : types){
-            this.stock.put(type, new StockageUnit(BUFFERSIZE));
+            this.stock.put(type, new StockageUnit());
         }
     }
 
     public ArrayList<Float> getValuesOfType(String type){
         return this.stock.get(type).getValues();
-    }
-
-    // MAIN
-    public static void main(String[] args) {
-        new testMQTT().run();
-    }
-
-    // Partie communication MQTT
-    public void run() {
-
-        String clientId = "JavaSample";
-        MemoryPersistence persistence = new MemoryPersistence();
-
-        try {
-            client = new MqttClient(CONNECTION_URL, clientId, persistence);
-            MqttConnectOptions connOpts = new MqttConnectOptions();
-
-            connOpts.setUserName(USERNAME);
-            connOpts.setPassword(PASSWORD.toCharArray());
-
-            connOpts.setCleanSession(true);
-            System.out.println("Connecting to broker: "+CONNECTION_URL);
-            client.connect(connOpts);
-            System.out.println("Connected");
-            client.setCallback(this);
-
-            client.subscribe(SUBSCRIPTION);
-
-            //client.disconnect();
-            //System.out.println("Disconnected");
-            //System.exit(0);
-        } catch(MqttException me) {
-            System.out.println("reason "+me.getReasonCode());
-            System.out.println("msg "+me.getMessage());
-            System.out.println("loc "+me.getLocalizedMessage());
-            System.out.println("cause "+me.getCause());
-            System.out.println("excep "+me);
-            me.printStackTrace();
-        }
-    }
-
-    @Override
-    public void connectionLost(Throwable throwable) {
-
-    }
-
-    @Override
-    public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        //System.out.println(mqttMessage);
-        JSONObject obj = new JSONObject(mqttMessage.toString());
-        //System.out.println(obj.toString());
-
-        switch (obj.getString("subID")){
-            // Reception des données des capteurs de l'ilot 1
-            case "ilot1":
-                if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux"))
-                    System.out.println("ilot1 lux : " + obj.getInt("value"));
-                else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence"))
-                    System.out.println("presence 1 : " + obj.getInt("value"));
-                break;
-            // Reception des données des capteurs de l'ilot 2
-            case "ilot2":
-                if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux"))
-                    System.out.println("ilot2 lux : " + obj.getInt("value"));
-                else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence"))
-                    System.out.println("presence 2 : " + obj.getInt("value"));
-                break;
-            // Reception des données des capteurs de l'ilot 3
-            case "ilot3":
-                if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux"))
-                    System.out.println("ilot3 lux : " + obj.getInt("value"));
-                else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence"))
-                    System.out.println("presence 3 : " + obj.getInt("value"));
-                break;
-            // Reception des données du capteur de luminosité exterieur
-            case "ouest":
-                // Conversion de la luminosité de W/m² en lux
-                if(obj.getString("unitID").equals("outside") && obj.getString("value_units").equals("w/m2"))
-                    System.out.println("exterieur : " + obj.getInt("value")/0.0079);
-                break;
-        }
-    }
-
-    @Override
-    public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-
     }
 }
