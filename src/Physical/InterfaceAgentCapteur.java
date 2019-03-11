@@ -1,3 +1,5 @@
+package Physical;
+
 public class InterfaceAgentCapteur {
     private MQTTInterfaceCapteur inter;
 
