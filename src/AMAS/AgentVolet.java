@@ -7,6 +7,7 @@ public class AgentVolet extends AgentNeoCampus {
 
     private StateVolet state;
     private StateVolet lastState;
+    private StateVolet stateRollback;
 
     public AgentVolet(AmasNeoCampus amas, Metrique metrique) {
         super(amas, metrique);
@@ -19,6 +20,10 @@ public class AgentVolet extends AgentNeoCampus {
     @Override
     protected void onPerceive() {
         // TODO ici on devra interroger l'interface MQTT pour remplir les données liées a nos capteurs
+
+        // on sauvegarde, pour le rollback en cas de bouclage le lastState précédent
+        stateRollback = new StateVolet(lastState);
+
         //on update le lastState
         lastState = new StateVolet(state);
 
@@ -96,9 +101,19 @@ public class AgentVolet extends AgentNeoCampus {
 
     private void decision(){
         if(isOpenShutter()){
+            // on part du principe qu'il n'y a pas besoin ici de tester si on boucle, car on veut dans le pire des cas
+            // que le volet soit dans l'état ouvert
+
             // critique, demander a l'interface d'ouvrir notre volet
         } else if(isCloseShutter()){
-            // critique, demander a l'interface de fermer notre volet
+            StateVolet nextState = new StateVolet(state);
+            nextState.toggleIsOpen();
+            if(!nextState.compareStates(this.lastState)) {
+                // critique, demander a l'interface de fermer notre volet
+            } else {
+                // on détecte un cas de bouclage : on rollback la valeur de lastState
+                lastState = new StateVolet(stateRollback);
+            }
         }
     }
 
