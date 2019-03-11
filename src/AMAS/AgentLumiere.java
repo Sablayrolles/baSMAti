@@ -1,9 +1,13 @@
 package AMAS;
 
+import Enumerations.Constantes;
 import Enumerations.Metrique;
 import Physical.StateLumiere;
 
+import java.util.concurrent.TimeUnit;
+
 public class AgentLumiere extends AgentNeoCampus{
+
     private StateLumiere state;
     private StateLumiere lastState;
     private StateLumiere stateRollback;
@@ -19,6 +23,10 @@ public class AgentLumiere extends AgentNeoCampus{
     @Override
     protected void onPerceive() {
         // TODO ici on devra interroger l'interface MQTT pour remplir les données liées a nos capteurs
+
+        // on sauvegarde, pour le rollback en cas de bouclage le lastState précédent
+        stateRollback = new StateLumiere(lastState);
+
         //on update le lastState (en dernier dans la fonction)
         lastState = new StateLumiere(state);
 
@@ -30,7 +38,16 @@ public class AgentLumiere extends AgentNeoCampus{
     @Override
     protected void onDecideAndAct() {
         // TODO suivant l'etat actuel et l'etat precedent, mis en place d'une action si besoin est
-        decision();
+        if(!(lastState.getIsOn() == state.getIsOn())) {
+            // user a override l'état de l'effecteur; il faut donc dormir
+            try {
+                TimeUnit.MINUTES.sleep(Constantes.MINUTES_USER_OVERRIDES);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            decision();
+        }
     }
 
     //##################################################################################################################

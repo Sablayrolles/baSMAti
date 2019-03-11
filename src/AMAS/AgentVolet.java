@@ -1,7 +1,10 @@
 package AMAS;
 
+import Enumerations.Constantes;
 import Enumerations.Metrique;
 import Physical.StateVolet;
+
+import java.util.concurrent.TimeUnit;
 
 public class AgentVolet extends AgentNeoCampus {
 
@@ -35,7 +38,16 @@ public class AgentVolet extends AgentNeoCampus {
     @Override
     protected void onDecideAndAct() {
         // TODO suivant l'etat actuel et l'etat precedent, mis en place d'une action si besoin est
-        decision();
+        if(!(lastState.getIsOpen() == state.getIsOpen())) {
+            // user a override l'état de l'effecteur; il faut donc dormir
+            try {
+                TimeUnit.MINUTES.sleep(Constantes.MINUTES_USER_OVERRIDES);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            decision();
+        }
     }
 
     //##################################################################################################################
