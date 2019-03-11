@@ -39,8 +39,8 @@ public class StateVolet {
         return isOpen;
     }
 
-    public void toggleIsPresence() {
-        this.isPresence = ! this.isPresence;
+    public void toggleIsOpen() {
+        this.isOpen = ! this.isOpen;
     }
 
     public boolean compareStates(StateVolet state){

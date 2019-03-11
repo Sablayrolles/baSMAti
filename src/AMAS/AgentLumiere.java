@@ -18,7 +18,7 @@ public class AgentLumiere extends AgentNeoCampus{
     @Override
     protected void onPerceive() {
         // TODO ici on devra interroger l'interface MQTT pour remplir les données liées a nos capteurs
-        //on update le lastState
+        //on update le lastState (en dernier dans la fonction)
         lastState = new StateLumiere(state);
 
         // On regarde l'etat des capteurs et l'etat de l'effecteur et on remplis les boolens de state ( bright tout ca )

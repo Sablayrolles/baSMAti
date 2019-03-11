@@ -39,6 +39,10 @@ public class StateLumiere {
         return isOn;
     }
 
+    public void toggleIsOn() {
+        this.isOn = ! this.isOn;
+    }
+
     public boolean compareStates(StateLumiere state){
         return     (this.isBrightInside == state.getIsBrightInside())
                 && (this.isBrightOutside == state.getIsBrightOutside())
