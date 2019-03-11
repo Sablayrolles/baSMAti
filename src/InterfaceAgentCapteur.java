@@ -36,7 +36,7 @@ public class InterfaceAgentCapteur {
         }
     }
 
-    public float getLuminositeInterieur(){
+    public float getLuminositeExterieur(){
         float m = 0;
         int s = 0;
 
