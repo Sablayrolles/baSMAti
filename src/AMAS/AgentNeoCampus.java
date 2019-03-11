@@ -46,4 +46,6 @@ public class AgentNeoCampus extends Agent<AmasNeoCampus, SalleEnv> {
     protected void onUpdateRender() {
         // Utilisé dans le tuto pour logger l'etat de l'agent apres chaque
     }*/
+
+
 }

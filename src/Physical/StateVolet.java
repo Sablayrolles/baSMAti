@@ -38,4 +38,15 @@ public class StateVolet {
     public boolean getIsOpen() {
         return isOpen;
     }
+
+    public void toggleIsPresence() {
+        this.isPresence = ! this.isPresence;
+    }
+
+    public boolean compareStates(StateVolet state){
+        return     (this.isBrightInside == state.getIsBrightInside())
+                && (this.isBrightOutside == state.getIsBrightOutside())
+                && (this.isPresence == state.getIsPresence())
+                && (this.isOpen == state.getIsOpen());
+    }
 }
