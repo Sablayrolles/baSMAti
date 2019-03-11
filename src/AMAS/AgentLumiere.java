@@ -12,8 +12,8 @@ public class AgentLumiere extends AgentNeoCampus{
     private StateLumiere lastState;
     private StateLumiere stateRollback;
 
-    public AgentLumiere(AmasNeoCampus amas, Metrique metrique) {
-        super(amas, metrique);
+    public AgentLumiere(AmasNeoCampus amas) {
+        super(amas, Metrique.LUMIERE);
         //TODO initialiser les capteurs effecteur suivant MQTT comment c'est plus simple ( dans state )
         state = new StateLumiere();
         state.updateValues();
