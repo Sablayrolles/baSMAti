@@ -15,16 +15,14 @@ public class SalleEnv extends Environment {
 
     private List<Dispositif> dispositifs;
 
-    // adresse MQTT
-    private String base;
 
-    public SalleEnv(String... base) {
+
+    public SalleEnv() {
         super(Scheduling.DEFAULT);
         /*this.base = String.join("/", base);*/
     }
     @Override
     public void onInitialization() {
-       /* dispositifs = new ArrayList<>();
-        // TODO Ajouter tous les capteurs de la salle*/
+
     }
 }

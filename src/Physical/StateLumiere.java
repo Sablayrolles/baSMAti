@@ -25,8 +25,12 @@ public class StateLumiere {
         this.isOn = state.getIsOn();
     }
 
-    public void updateValues(SalleEnv env){
-        //TODO liaison avec MQTT
+    public void updateValues(){
+        this.isPresence = Capteur.getIsPresence();
+        this.isBrightOutside = Capteur.getIsBrightOutside();
+        this.isBrightInside = Capteur.getIsBrightInside();
+        //TODO aussi update l'etat du capteur une fois l'interface effecteur fonctionelle
+
 
     }
 

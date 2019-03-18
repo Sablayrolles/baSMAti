@@ -16,12 +16,6 @@ public class InterfaceMQTT implements MqttCallback{
     public InterfaceMQTT() {
     }
 
-    public static void main(String[] args) {
-        Capteur cap = new Capteur();
-        Effecteur eff = new Effecteur();
-        new InterfaceMQTT().run();
-    }
-
     public void run() {
 
         String clientId = "JavaSample";

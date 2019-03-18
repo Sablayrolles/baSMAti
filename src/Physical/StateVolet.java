@@ -20,7 +20,10 @@ public class StateVolet {
     }
 
     public void updateValues(){
-        //TODO liaison avec MQTT
+        this.isPresence = Capteur.getIsPresence();
+        this.isBrightOutside = Capteur.getIsBrightOutside();
+        this.isBrightInside = Capteur.getIsBrightInside();
+        //TODO aussi update l'etat du capteur une fois l'interface effecteur fonctionelle
     }
 
     public boolean getIsBrightInside() {
