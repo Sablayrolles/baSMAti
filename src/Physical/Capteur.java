@@ -74,11 +74,23 @@ public class Capteur {
         return diffSeconds;
     }
 
+    /**
+     *
+     * @return vrai si une présence a été detectée dans la salle il y'a moins de Constantes.SEUIL_TEMPS_PRESENCE_SECONDES
+     */
     public static boolean getIsPresence(){
-        boolean presence;
-        presence = getDateDifference() <= Constantes.SEUIL_TEMPS_PRESENCE_SECONDES;
+        return getDateDifference() <= Constantes.SEUIL_TEMPS_PRESENCE_SECONDES;
+    }
 
-        return presence;
+    /**
+     *
+     * @return retourne vrai si la lum exterieure est superieur au seuil Constantes.SEUIL_LUM_EXT.
+     */
+    public static boolean getIsBrightOutside(){
+        return getLuminositeExt() >= Constantes.SEUIL_LUM_EXT;
+    }
 
+    public static boolean getIsBrightInside(){
+        return getLuminositeInt() >= Constantes.SEUIL_LUM_INT;
     }
 }
