@@ -1,11 +1,10 @@
 package Physical;
 
+import Enumerations.Constantes;
+
 import java.util.Date;
 
 public class Capteur {
-    private static final int NB_CAPTEURS_LUM_INT = 3;
-    private static final int NB_CAPTEURS_PRESENCE = 3;
-    private static final int SEUIL_TEMPS_PRESENCE_SECONDES = 180;
 
     private static boolean [] presence;
     private static Date datePresence = new Date();
@@ -13,8 +12,8 @@ public class Capteur {
     private static float luminositeExt;
 
     public Capteur() {
-        presence = new boolean [NB_CAPTEURS_PRESENCE];
-        luminositeInt = new int [NB_CAPTEURS_LUM_INT];
+        presence = new boolean [Constantes.NB_CAPTEURS_PRESENCE];
+        luminositeInt = new int [Constantes.NB_CAPTEURS_LUM_INT];
         luminositeExt = 0;
     }
 
@@ -45,7 +44,7 @@ public class Capteur {
         for(int i : luminositeInt){
             sum += i;
         }
-        return sum / NB_CAPTEURS_LUM_INT;
+        return sum / Constantes.NB_CAPTEURS_LUM_INT;
     }
 
     public static void setLuminositeInt(int indice, int value) {
@@ -77,7 +76,7 @@ public class Capteur {
 
     public static boolean getIsPresence(){
         boolean presence;
-        presence = getDateDifference() <= SEUIL_TEMPS_PRESENCE_SECONDES;
+        presence = getDateDifference() <= Constantes.SEUIL_TEMPS_PRESENCE_SECONDES;
 
         return presence;
 
