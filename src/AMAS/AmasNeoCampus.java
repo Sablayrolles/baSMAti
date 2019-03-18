@@ -16,6 +16,7 @@ public class AmasNeoCampus extends Amas<SalleEnv> {
         AgentLumiere = new AgentNeoCampus(this,Metrique.LUMIERE);
         AgentVolet = new AgentNeoCampus(this, Metrique.VOLET);
         // TODO initaliser les agents?
+
     }
 
     @Override

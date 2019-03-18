@@ -1,5 +1,7 @@
 package Physical;
 
+import AMAS.SalleEnv;
+
 public class StateLumiere {
 
 
@@ -9,6 +11,10 @@ public class StateLumiere {
     private boolean isOn;
 
     public StateLumiere() {
+        this.isBrightInside = false;
+        this.isBrightOutside = false;
+        this.isPresence = false;
+        this.isOn = false;
     }
 
     //constructeur de copie, pour last state
@@ -19,8 +25,10 @@ public class StateLumiere {
         this.isOn = state.getIsOn();
     }
 
-    public void updateValues(){
+    public void updateValues(SalleEnv env){
         //TODO liaison avec MQTT
+        
+
     }
 
     public boolean getIsBrightInside() {
