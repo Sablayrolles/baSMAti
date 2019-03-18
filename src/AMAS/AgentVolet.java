@@ -32,7 +32,7 @@ public class AgentVolet extends AgentNeoCampus {
 
         // On regarde l'etat des capteurs et l'etat de l'effecteur et on remplis les boolens de state ( bright tout ca )
         // suivant les valeurs brutes ( en lux ) recu de l'interface.
-
+        System.err.println("Je suis l'agent volet et je suis en train de percevoir le monde: c'est d'la merde");
     }
 
     @Override
@@ -48,6 +48,7 @@ public class AgentVolet extends AgentNeoCampus {
         } else {
             decision();
         }
+        System.err.println("Je suis l'agent volet et je suis en train de décider ce que je vais faire: rien, de toute facon ca vaut pas le coup... -_-");
     }
 
     //##################################################################################################################
