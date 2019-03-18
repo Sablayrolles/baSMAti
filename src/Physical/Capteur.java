@@ -5,6 +5,7 @@ import java.util.Date;
 public class Capteur {
     private static final int NB_CAPTEURS_LUM_INT = 3;
     private static final int NB_CAPTEURS_PRESENCE = 3;
+    private static final int SEUIL_TEMPS_PRESENCE_SECONDES = 180;
 
     private static boolean [] presence;
     private static Date datePresence = new Date();
@@ -63,12 +64,22 @@ public class Capteur {
 
     /**
      Permet d'avoir la différence (en secondes) entre la dernière présence et maintenant
-     @return La valeur de la somme des deux entiers spécifiés.
+     @return La valeur de la différence des deux dates spécifiés.
      */
-    public static void getDateDifference(){
+    public static long getDateDifference(){
         long diff = (new Date().getTime()) - datePresence.getTime();
         long diffSeconds = diff / 1000;
         long diffMinutes = diff / (60 * 1000);
         System.out.println(diffSeconds+" secondes "+ diffMinutes+ " minutes");
+
+        return diffSeconds;
+    }
+
+    public static boolean getIsPresence(){
+        boolean presence;
+        presence = getDateDifference() <= SEUIL_TEMPS_PRESENCE_SECONDES;
+
+        return presence;
+
     }
 }

@@ -1,14 +1,11 @@
 package AMAS;
 
-import Enumerations.Metrique;
 import Physical.Dispositif;
-import Physical.Effecteur;
 import fr.irit.smac.amak.Environment;
 import fr.irit.smac.amak.Scheduling;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SalleEnv extends Environment {
 
@@ -36,7 +33,7 @@ public class SalleEnv extends Environment {
                 .map((d) -> (Capteur) d)
                 .collect(Collectors.toList());
     }
-    */
+
     public List<Effecteur> getEffecteur(Metrique metrique,String id) {
         // Met la liste dispositifs sous forme de stream, filtre pour ne garder que les effecteurs de la metrique
         // utilise un map pour cast le résultat en effecteur
@@ -44,5 +41,5 @@ public class SalleEnv extends Environment {
         return dispositifs.stream().filter((d) -> d instanceof Effecteur && d.getMetrique() == metrique)
                 .map((d) -> (Effecteur) d)
                 .collect(Collectors.toList());
-    }
+    }*/
 }
