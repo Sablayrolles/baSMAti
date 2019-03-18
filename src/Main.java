@@ -11,5 +11,6 @@ public class Main {
         new InterfaceMQTT().run();
         System.err.println("MQTT initialised\n");
         AmasNeoCampus amas = new AmasNeoCampus(new SalleEnv());
+        amas.start();
     }
 }

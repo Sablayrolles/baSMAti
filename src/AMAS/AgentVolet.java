@@ -12,8 +12,8 @@ public class AgentVolet extends AgentNeoCampus {
     private StateVolet lastState;
     private StateVolet stateRollback;
 
-    public AgentVolet(AmasNeoCampus amas, Metrique metrique) {
-        super(amas, metrique);
+    public AgentVolet(AmasNeoCampus amas) {
+        super(amas);
         //TODO initialiser les capteurs effecteur suivant MQTT comment c'est plus simple ( dans state )
         state = new StateVolet();
         state.updateValues();

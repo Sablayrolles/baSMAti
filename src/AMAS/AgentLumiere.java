@@ -1,7 +1,6 @@
 package AMAS;
 
 import Enumerations.Constantes;
-import Enumerations.Metrique;
 import Physical.StateLumiere;
 
 import java.util.concurrent.TimeUnit;
@@ -13,7 +12,7 @@ public class AgentLumiere extends AgentNeoCampus{
     private StateLumiere stateRollback;
 
     public AgentLumiere(AmasNeoCampus amas) {
-        super(amas, Metrique.LUMIERE);
+        super(amas);
         //TODO initialiser les capteurs effecteur suivant MQTT comment c'est plus simple ( dans state )
         state = new StateLumiere();
         state.updateValues();

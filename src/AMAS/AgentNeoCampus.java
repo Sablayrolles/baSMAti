@@ -1,18 +1,15 @@
 package AMAS;
 
-import Enumerations.Metrique;
 import fr.irit.smac.amak.Agent;
 
 public class AgentNeoCampus extends Agent<AmasNeoCampus, SalleEnv> {
 
-    protected Metrique metrique;
     protected String effecteur;
     //private List<Capteur> capteurs;
     //private Effecteur effecteurs;
 
-    public AgentNeoCampus(AmasNeoCampus amas, Metrique metrique) {
+    public AgentNeoCampus(AmasNeoCampus amas) {
         super(amas);
-        this.metrique = metrique;
 
         //TODO rendre fonctionnel les classes capteurs effecteurs
         //this.capteurs = getEnvironment().getCapteurs(this.metrique);
