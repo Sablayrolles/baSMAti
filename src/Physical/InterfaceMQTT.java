@@ -2,21 +2,23 @@ package Physical;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.json.*;
+import org.json.JSONObject;
 
-public class testMQTT implements MqttCallback{
+import java.util.Date;
+
+public class InterfaceMQTT implements MqttCallback{
 
     private static final String CONNECTION_URL = "tcp://neocampus.univ-tlse3.fr:1883";
     private static final String SUBSCRIPTION = "u4/302/#";
     private static final String USERNAME = "m2dc";
     private static final String PASSWORD = "m2dc;18";
 
-    public testMQTT() {
+    public InterfaceMQTT() {
     }
 
     public static void main(String[] args) {
         Capteur cap = new Capteur();
-        new testMQTT().run();
+        new InterfaceMQTT().run();
     }
 
     public void run() {
@@ -66,38 +68,53 @@ public class testMQTT implements MqttCallback{
         switch (obj.getString("subID")){
             // Reception des données des capteurs de l'ilot 1
             case "ilot1":
+                // Capteur luminosité
                 if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
                     System.out.println("ilot1 lux : " + obj.getInt("value"));
                     Capteur.setLuminositeInt(0, obj.getInt("value"));
                 }
+                // Capteur présence
                 else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
                     System.out.println("presence 1 : " + obj.getInt("value"));
-                    boolean val = (obj.getInt("value")==1);
+                    boolean val = (obj.getInt("value")==1); // Permet de convertir un int en bool
                     Capteur.setPresence(0, val);
+                    // Sauvegarde la date de présence
+                    if (!val)
+                        Capteur.setDatePresence(new Date());
                 }
             break;
             // Reception des données des capteurs de l'ilot 2
             case "ilot2":
+                // Capteur luminosité
                 if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
                     System.out.println("ilot2 lux : " + obj.getInt("value"));
                     Capteur.setLuminositeInt(1, obj.getInt("value"));
                 }
+                // Capteur présence
                 else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
                     System.out.println("presence 2 : " + obj.getInt("value"));
                     boolean val = (obj.getInt("value")==1);
                     Capteur.setPresence(1, val);
+                    // Sauvegarde la date de présence
+                    if (!val)
+                        Capteur.setDatePresence(new Date());
                 }
             break;
             // Reception des données des capteurs de l'ilot 3
             case "ilot3":
+                // Capteur luminosité
                 if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
                     System.out.println("ilot3 lux : " + obj.getInt("value"));
                     Capteur.setLuminositeInt(2, obj.getInt("value"));
                 }
+                // Capteur présence
                 else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
                     System.out.println("presence 3 : " + obj.getInt("value"));
                     boolean val = (obj.getInt("value")==1);
                     Capteur.setPresence(2, val);
+                    // Sauvegarde la date de présence
+                    if (!val)
+                        Capteur.setDatePresence(new Date());
                 }
             break;
             // Reception des données du capteur de luminosité exterieur
@@ -106,7 +123,7 @@ public class testMQTT implements MqttCallback{
                 if(obj.getString("unitID").equals("outside") && obj.getString("value_units").equals("w/m2")) {
                     System.out.println("exterieur : " + obj.getInt("value") / 0.0079);
                     Capteur.setLuminositeExt((float) (obj.getInt("value") / 0.0079));
-                    System.out.println(Capteur.getLuminositeExt());
+                    Capteur.getDateDifference();
                 }
             break;
         }

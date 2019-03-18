@@ -1,17 +1,23 @@
 package Physical;
+
+import java.util.Date;
+
 public class Capteur {
     private static final int NB_CAPTEURS_LUM_INT = 3;
     private static final int NB_CAPTEURS_PRESENCE = 3;
 
     private static boolean [] presence;
+    private static Date datePresence = new Date();
     private static int [] luminositeInt;
     private static float luminositeExt;
 
     public Capteur() {
-        presence = new boolean [3];
-        luminositeInt = new int [3];
+        presence = new boolean [NB_CAPTEURS_PRESENCE];
+        luminositeInt = new int [NB_CAPTEURS_LUM_INT];
         luminositeExt = 0;
     }
+
+    ////// GETTER ET SETTER
 
     public static boolean getPresence() {
         boolean isPresence = false;
@@ -23,6 +29,14 @@ public class Capteur {
 
     public static void setPresence(int indice, boolean value) {
         Capteur.presence[indice]= value;
+    }
+
+    public static Date getDatePresence() {
+        return datePresence;
+    }
+
+    public static void setDatePresence(Date datePresence) {
+        Capteur.datePresence = datePresence;
     }
 
     public static float getLuminositeInt() {
@@ -43,5 +57,18 @@ public class Capteur {
 
     public static void setLuminositeExt(float luminositeExt) {
         Capteur.luminositeExt = luminositeExt;
+    }
+
+    /////////////////////////////////
+
+    /**
+     Permet d'avoir la différence (en secondes) entre la dernière présence et maintenant
+     @return La valeur de la somme des deux entiers spécifiés.
+     */
+    public static void getDateDifference(){
+        long diff = (new Date().getTime()) - datePresence.getTime();
+        long diffSeconds = diff / 1000;
+        long diffMinutes = diff / (60 * 1000);
+        System.out.println(diffSeconds+" secondes "+ diffMinutes+ " minutes");
     }
 }
