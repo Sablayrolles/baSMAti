@@ -27,7 +27,6 @@ public class StateLumiere {
 
     public void updateValues(SalleEnv env){
         //TODO liaison avec MQTT
-        
 
     }
 
