@@ -1,5 +1,6 @@
 import AMAS.AmasNeoCampus;
 import AMAS.SalleEnv;
+import Enumerations.Constantes;
 import Physical.Capteur;
 import Physical.Effecteur;
 import Physical.InterfaceMQTT;
@@ -11,6 +12,6 @@ public class Main {
         new InterfaceMQTT().run();
         System.err.println("MQTT initialised\n");
         AmasNeoCampus amas = new AmasNeoCampus(new SalleEnv());
-        amas.start();
+        amas.getScheduler().startWithSleep(Constantes.AMAS_TICKRATE_MILLISECOND);
     }
 }

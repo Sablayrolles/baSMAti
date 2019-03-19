@@ -14,6 +14,7 @@ public class AmasNeoCampus extends Amas<SalleEnv> {
         super(environment, Scheduling.DEFAULT);
     }
 
+
     @Override
     protected void onInitialAgentsCreation() {
         agentLumiere1 = new AgentLumiere(this);

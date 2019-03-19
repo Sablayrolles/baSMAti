@@ -15,7 +15,7 @@ public class AgentNeoCampus extends Agent<AmasNeoCampus, SalleEnv> {
         //this.capteurs = getEnvironment().getCapteurs(this.metrique);
         //this.effecteurs = getEnvironment().getEffecteur(this.metrique,id);
     }
-    
+
     /*@Override
     protected void onInitialization() {
         //sans doute pas besoin car init fait dans le constructeur
