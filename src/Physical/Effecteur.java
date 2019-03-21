@@ -1,19 +1,21 @@
 package Physical;
 
+import java.util.HashMap;
+
 public class Effecteur {
-    private static String [] volets;
+    private static HashMap<String,String> volets;
     private static String lumiere;
 
     public Effecteur() {
-        volets = new String[3];
+        volets = new HashMap<String,String>();
     }
 
-    public static String[] getVolets() {
-        return volets;
+    public static String getVolets(String nom) {
+        return Effecteur.volets.get(nom);
     }
 
-    public static void setVolets(String[] volets) {
-        Effecteur.volets = volets;
+    public static void setVolets(String nom, String volets) {
+        Effecteur.volets.put(nom, volets);
     }
 
     public static String getLumiere() {
