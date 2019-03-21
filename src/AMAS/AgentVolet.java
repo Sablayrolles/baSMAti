@@ -53,7 +53,7 @@ public class AgentVolet extends AgentNeoCampus {
     }
 
     //##################################################################################################################
-    //table de karnaught pour chaque
+    //table de karnaught pour chaque action
     // A: isPresence
     // B: isBrightOutside
     // C: IsBrightInside

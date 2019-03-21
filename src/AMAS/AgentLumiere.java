@@ -51,86 +51,52 @@ public class AgentLumiere extends AgentNeoCampus{
     }
 
     //##################################################################################################################
-    //fonction avec tout les cas et decision, la plus compréhensible mais sale
-    // ( j'ai pris la liste des cas critiques de bas en haut )
+    //table de karnaught pour chaque action
+    // A: isPresence
+    // B: isBrightOutside
+    // C: IsBrightInside
+    // D: isOn
 
-    private void allCasesDecision() {
-        if (state.getIsPresence() && state.getIsBrightOutside() && state.getIsBrightInside() && state.getIsOn()) {
-            // critique economie
-            // demander a l'interface d'eteindre notre lampe
-        } else if (state.getIsPresence() && state.getIsBrightOutside() && !state.getIsBrightInside() && !state.getIsOn()) {
-            // critique confort
-            // demander a l'interface d'allumer notre lampe
-        } else if (state.getIsPresence() && !state.getIsBrightOutside() && !state.getIsBrightInside() && !state.getIsOn()){
-            // critique confort
-            // demander a l'interface d'allumer notre lampe
-        } else if (!state.getIsPresence() && state.getIsBrightOutside() && state.getIsBrightInside() && state.getIsOn()){
-            // critique economie
-            // demander a l'interface d'eteindre notre lampe
-        } else if (!state.getIsPresence() && state.getIsBrightOutside() && !state.getIsBrightInside() && state.getIsOn()){
-            // critique economie
-            // demander a l'interface d'eteindre notre lampe
-        } else if (!state.getIsPresence() && !state.getIsBrightOutside() && state.getIsBrightInside() && state.getIsOn()){
-            // critique economie
-            // demander a l'interface d'eteindre notre lampe
-        } else if (!state.getIsPresence() && !state.getIsBrightOutside() && !state.getIsBrightInside() && state.getIsOn()){
-            // critique economie
-            // demander a l'interface d'eteindre notre lampe
-        }
-    }
-
-    //##################################################################################################################
-    //tout les cas concentré sur les deux actions possible, moins clair, plus court
-
-    private boolean bigIsTurnOn(){
-        return (state.getIsPresence() && state.getIsBrightOutside() && !state.getIsBrightInside() && !state.getIsOn())
-        || (state.getIsPresence() && !state.getIsBrightOutside() && !state.getIsBrightInside() && !state.getIsOn());
-    }
-
-    private boolean bigIsTurnOff() {
-        return (state.getIsPresence() && state.getIsBrightOutside() && state.getIsBrightInside() && state.getIsOn())
-        || (!state.getIsPresence() && state.getIsBrightOutside() && state.getIsBrightInside() && state.getIsOn())
-        || (!state.getIsPresence() && state.getIsBrightOutside() && !state.getIsBrightInside() && state.getIsOn())
-        || (!state.getIsPresence() && !state.getIsBrightOutside() && state.getIsBrightInside() && state.getIsOn())
-        || (!state.getIsPresence() && !state.getIsBrightOutside() && !state.getIsBrightInside() && state.getIsOn());
-    }
-
-    private void bigDecision(){
-        if (bigIsTurnOn()){
-            // critique, demander a l'interface d'allumer notre lumiere
-        } else if (bigIsTurnOff()) {
-            // critique, demander a l'interface d'eteindre notre lumiere
-        }
-    }
-
-    //##################################################################################################################
-    //table de karnaught pour chaque action, beaucoup plus simple et propre, plus dur a reverse engenieer
 
     private boolean isTurnOff(){
-        // table de karnaugh pour les cas needTurnOff = 1 y = ((!A)D or BCD)
-        return (!state.getIsPresence() && state.getIsBrightOutside())
+        // table de karnaugh pour les cas needTurnOff = 1
+        // formule:  y = (!A)D + BCD
+        return (!state.getIsPresence() && state.getIsOn())
                 || (state.getIsBrightOutside() && state.getIsBrightInside() && state.getIsOn());
     }
     private boolean isTurnOn(){
-        // table de karnaugh pour les cas needTurnOn = 1 y = A!C!D
+        // table de karnaugh pour les cas needTurnOn = 1
+        // formule: y = A(!C)(!D)
         return (state.getIsPresence() && !state.getIsBrightInside() && !state.getIsOn());
+    }
+
+    private boolean isErrorCase(){
+        // formule: y = (!B)C(!D) + A(!C)D
+        return (!state.getIsBrightOutside() && state.getIsBrightInside() && !state.getIsOn())
+                ||(state.getIsPresence() && !state.getIsBrightInside() && state.getIsOn());
     }
 
     private void decision(){
         if(isTurnOn()){
             // on part du principe qu'il n'y a pas besoin ici de tester si on boucle, car on veut dans le pire des cas
             // que les lumières soient allumées
-
+            //TODO
             // critique, demander a l'interface d'allumer notre lampe
         } else if(isTurnOff()){
             StateLumiere nextState = new StateLumiere(state);
             nextState.toggleIsOn();
             if(!nextState.compareStates(this.lastState)) {
+                //TODO
                 // critique, demander a l'interface d'eteindre notre lampe
             } else {
                 // on détecte un cas de bouclage : on rollback la valeur de lastState
                 lastState = new StateLumiere(stateRollback);
             }
+        } else if (isErrorCase()){
+            //TODO
+            // cas impossible: envoyer message d'erreur
+            System.err.println("Cas impossible");
+
         }
     }
 
