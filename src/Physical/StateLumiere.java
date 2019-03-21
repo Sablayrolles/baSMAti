@@ -29,6 +29,7 @@ public class StateLumiere {
         this.isPresence = Capteur.getIsPresence();
         this.isBrightOutside = Capteur.getIsBrightOutside();
         this.isBrightInside = Capteur.getIsBrightInside();
+        this.isOn = Effecteur.getIsOn();
         //TODO aussi update l'etat du capteur une fois l'interface effecteur fonctionelle
 
 
@@ -63,6 +64,10 @@ public class StateLumiere {
 
     @Override
     public String toString() {
-        return "isBrightOutside:"+isBrightOutside+" \nisBrightInside:"+isBrightInside+" \nisPresence:"+isPresence+" \nisOn:"+isOn;
+        return  "|isBrightOutside:"+isBrightOutside+" \n" +
+                "|isBrightInside:"+isBrightInside+" \n" +
+                "|isPresence:"+isPresence+" \n" +
+                "|isOn:"+isOn+
+                "-------------------------------------------";
     }
 }

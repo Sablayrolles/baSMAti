@@ -23,10 +23,11 @@ public class StateVolet {
         this.isOpen = state.getIsOpen();
     }
 
-    public void updateValues(){
+    public void updateValues(String effecteur){
         this.isPresence = Capteur.getIsPresence();
         this.isBrightOutside = Capteur.getIsBrightOutside();
         this.isBrightInside = Capteur.getIsBrightInside();
+        this.isOpen = Effecteur.getIsOpen(effecteur);
         //TODO aussi update l'etat du capteur une fois l'interface effecteur fonctionelle
     }
 
@@ -59,6 +60,10 @@ public class StateVolet {
 
     @Override
     public String toString() {
-        return "isBrightOutside:"+isBrightOutside+" \nisBrightInside:"+isBrightInside+" \nisPresence:"+isPresence+" \nisOpen:"+isOpen;
+        return  "|isBrightOutside:"+isBrightOutside+" \n" +
+                "|isBrightInside:"+isBrightInside+" \n" +
+                "|isPresence:"+isPresence+" \n" +
+                "|isOpen:"+isOpen+" \n" +
+                "-------------------------------------------";
     }
 }

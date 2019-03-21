@@ -16,7 +16,7 @@ public class AgentVolet extends AgentNeoCampus {
         super(amas);
         //TODO initialiser les capteurs effecteur suivant MQTT comment c'est plus simple ( dans state )
         state = new StateVolet();
-        state.updateValues();
+        state.updateValues(effecteur);
         lastState = new StateVolet(state);
         effecteur = id;
     }
@@ -35,7 +35,7 @@ public class AgentVolet extends AgentNeoCampus {
         }
         // On regarde l'etat des capteurs et l'etat de l'effecteur et on remplis les boolens de state ( bright tout ca )
         // suivant les valeurs brutes ( en lux ) recu de l'interface.
-        state.updateValues();
+        state.updateValues(effecteur);
         //System.err.println("Je suis l'agent volet et je suis en train de percevoir le monde: c'est d'la merde");
     }
 

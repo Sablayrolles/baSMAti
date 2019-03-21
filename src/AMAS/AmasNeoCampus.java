@@ -20,7 +20,6 @@ public class AmasNeoCampus extends Amas<SalleEnv> {
         agentVolet1 = new AgentVolet(this, Constantes.VOLETS_BACK);
         agentVolet2 = new AgentVolet(this,Constantes.VOLETS_CENTER);
         agentVolet3 = new AgentVolet(this,Constantes.VOLETS_FRONT);
-        // TODO initaliser les agents?
 
 
     }
