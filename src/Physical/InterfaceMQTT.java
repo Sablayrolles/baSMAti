@@ -133,20 +133,26 @@ public class InterfaceMQTT implements MqttCallback{
             break;
         }
 
-        // Permet de récupérer les status des effecteurs
-        switch (obj.getString("unitID")){
-            case "back" : Effecteur.setVolets(VOLETS_BACK, obj.getString("status"));
-                System.out.println("back : " + obj.getString("status"));
-            break;
-            case "center" : Effecteur.setVolets(VOLETS_CENTER, obj.getString("status"));
-                System.out.println("center : " + obj.getString("status"));
-            break;
-            case "front" : Effecteur.setVolets(VOLETS_FRONT, obj.getString("status"));
-                System.out.println("front : " + obj.getString("status"));
-            break;
-            case "others" : Effecteur.setLumiere(obj.getString("status"));
-                System.out.println("other : " + obj.getString("status"));
-            break;
+        if(obj.toMap().containsKey("unitID")) {
+            // Permet de récupérer les status des effecteurs
+            switch (obj.getString("unitID")) {
+                case "back":
+                    Effecteur.setVolets(VOLETS_BACK, obj.getString("status"));
+                    System.out.println("back : " + obj.getString("status"));
+                    break;
+                case "center":
+                    Effecteur.setVolets(VOLETS_CENTER, obj.getString("status"));
+                    System.out.println("center : " + obj.getString("status"));
+                    break;
+                case "front":
+                    Effecteur.setVolets(VOLETS_FRONT, obj.getString("status"));
+                    System.out.println("front : " + obj.getString("status"));
+                    break;
+                case "others":
+                    Effecteur.setLumiere(obj.getString("status"));
+                    System.out.println("other : " + obj.getString("status"));
+                    break;
+            }
         }
     }
 
