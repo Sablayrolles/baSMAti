@@ -9,4 +9,3 @@ public final class Constantes {
     public static final int SEUIL_LUM_INT = 250;
     public static final int AMAS_TICKRATE_MILLISECOND = 5000;
 }
-
