@@ -6,6 +6,8 @@ import org.json.JSONObject;
 
 import java.util.Date;
 
+import static Enumerations.Constantes.*;
+
 public class InterfaceMQTT implements MqttCallback{
 
     private static final String CONNECTION_URL = "tcp://neocampus.univ-tlse3.fr:1883";
@@ -128,6 +130,22 @@ public class InterfaceMQTT implements MqttCallback{
                     Capteur.setLuminositeExt((float) (obj.getInt("value") / 0.0079));
                     Capteur.getDateDifference();
                 }
+            break;
+        }
+
+        // Permet de récupérer les status des effecteurs
+        switch (obj.getString("unitID")){
+            case "back" : Effecteur.setVolets(VOLETS_BACK, obj.getString("status"));
+                System.out.println("back : " + obj.getString("status"));
+            break;
+            case "center" : Effecteur.setVolets(VOLETS_CENTER, obj.getString("status"));
+                System.out.println("center : " + obj.getString("status"));
+            break;
+            case "front" : Effecteur.setVolets(VOLETS_FRONT, obj.getString("status"));
+                System.out.println("front : " + obj.getString("status"));
+            break;
+            case "others" : Effecteur.setLumiere(obj.getString("status"));
+                System.out.println("other : " + obj.getString("status"));
             break;
         }
     }
