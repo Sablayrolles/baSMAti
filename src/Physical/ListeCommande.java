@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import static Enumerations.Constantes.*;
 
-public class Effecteur {
+public class ListeCommande {
     private static ArrayList<Commande> listeOrdre;
 
-    public Effecteur(){
+    public ListeCommande(){
         listeOrdre = new ArrayList<Commande>();
     }
 
