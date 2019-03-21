@@ -1,12 +1,11 @@
 package AMAS;
 
+import Enumerations.Constantes;
 import fr.irit.smac.amak.Amas;
 import fr.irit.smac.amak.Scheduling;
 
 public class AmasNeoCampus extends Amas<SalleEnv> {
-    AgentLumiere agentLumiere1;
-    AgentLumiere agentLumiere2;
-    AgentLumiere agentLumiere3;
+    AgentLumiere agentLumiere;
     AgentVolet agentVolet1;
     AgentVolet agentVolet2;
     AgentVolet agentVolet3;
@@ -17,12 +16,10 @@ public class AmasNeoCampus extends Amas<SalleEnv> {
 
     @Override
     protected void onInitialAgentsCreation() {
-        agentLumiere1 = new AgentLumiere(this);
-        agentVolet1 = new AgentVolet(this);
-        agentLumiere2 = new AgentLumiere(this);
-        agentVolet2 = new AgentVolet(this);
-        agentLumiere3 = new AgentLumiere(this);
-        agentVolet3 = new AgentVolet(this);
+        agentLumiere = new AgentLumiere(this);
+        agentVolet1 = new AgentVolet(this, Constantes.VOLETS_BACK);
+        agentVolet2 = new AgentVolet(this,Constantes.VOLETS_CENTER);
+        agentVolet3 = new AgentVolet(this,Constantes.VOLETS_FRONT);
         // TODO initaliser les agents?
 
 

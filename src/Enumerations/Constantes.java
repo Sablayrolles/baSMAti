@@ -5,9 +5,10 @@ public final class Constantes {
     public static final int NB_CAPTEURS_LUM_INT = 3;
     public static final int NB_CAPTEURS_PRESENCE = 3;
     public static final int SEUIL_TEMPS_PRESENCE_SECONDES = 180;
-    public static final int SEUIL_LUM_EXT = 25000;
-    public static final int SEUIL_LUM_INT = 250;
+    public static final int SEUIL_LUM_EXT = 5000;
+    public static final int SEUIL_LUM_INT = 200;
     public static final int AMAS_TICKRATE_MILLISECOND = 5000;
+    public static final boolean SHOW_STATE = false;
 
     // Commandes MQTT
 

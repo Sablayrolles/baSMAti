@@ -1,6 +1,7 @@
 package AMAS;
 
 import Enumerations.Constantes;
+import Physical.ListeCommande;
 import Physical.StateLumiere;
 
 import java.util.concurrent.TimeUnit;
@@ -28,9 +29,12 @@ public class AgentLumiere extends AgentNeoCampus{
 
         //on update le lastState (en dernier dans la fonction)
         lastState = new StateLumiere(state);
-
+        if(Constantes.SHOW_STATE) {
+            System.out.println("[Lum]State:\n" + state.toString());
+        }
         // On regarde l'etat des capteurs et l'etat de l'effecteur et on remplis les boolens de state ( bright tout ca )
         // suivant les valeurs brutes ( en lux ) recu de l'interface.
+        state.updateValues();
         //System.err.println("Je suis l'agent lumière et je suis en train de percevoir le monde: c'est d'la merde");
     }
 
@@ -80,14 +84,16 @@ public class AgentLumiere extends AgentNeoCampus{
         if(isTurnOn()){
             // on part du principe qu'il n'y a pas besoin ici de tester si on boucle, car on veut dans le pire des cas
             // que les lumières soient allumées
-            //TODO
             // critique, demander a l'interface d'allumer notre lampe
+            System.out.println("[Lum][Situation critique]: allumer les lumière ");
+            ListeCommande.allumerLumieres();
         } else if(isTurnOff()){
             StateLumiere nextState = new StateLumiere(state);
             nextState.toggleIsOn();
             if(!nextState.compareStates(this.lastState)) {
-                //TODO
                 // critique, demander a l'interface d'eteindre notre lampe
+                System.out.println("[Lum][Situation critique]: eteindre les lumière ");
+                ListeCommande.eteindreLumieres();
             } else {
                 // on détecte un cas de bouclage : on rollback la valeur de lastState
                 lastState = new StateLumiere(stateRollback);
@@ -95,8 +101,9 @@ public class AgentLumiere extends AgentNeoCampus{
         } else if (isErrorCase()){
             //TODO
             // cas impossible: envoyer message d'erreur
-            System.err.println("Cas impossible");
-
+            System.err.println("[Lum][Cas impossible]");
+        } else {
+            System.out.println("[Lum][Situation normale]");
         }
     }
 

@@ -1,6 +1,7 @@
 package AMAS;
 
 import Enumerations.Constantes;
+import Physical.ListeCommande;
 import Physical.StateVolet;
 
 import java.util.concurrent.TimeUnit;
@@ -11,12 +12,13 @@ public class AgentVolet extends AgentNeoCampus {
     private StateVolet lastState;
     private StateVolet stateRollback;
 
-    public AgentVolet(AmasNeoCampus amas) {
+    public AgentVolet(AmasNeoCampus amas, String id) {
         super(amas);
         //TODO initialiser les capteurs effecteur suivant MQTT comment c'est plus simple ( dans state )
         state = new StateVolet();
         state.updateValues();
         lastState = new StateVolet(state);
+        effecteur = id;
     }
 
     @Override
@@ -28,9 +30,12 @@ public class AgentVolet extends AgentNeoCampus {
 
         //on update le lastState
         lastState = new StateVolet(state);
-
+        if(Constantes.SHOW_STATE){
+            System.out.println("["+effecteur+"]State:\n"+state.toString());
+        }
         // On regarde l'etat des capteurs et l'etat de l'effecteur et on remplis les boolens de state ( bright tout ca )
         // suivant les valeurs brutes ( en lux ) recu de l'interface.
+        state.updateValues();
         //System.err.println("Je suis l'agent volet et je suis en train de percevoir le monde: c'est d'la merde");
     }
 
@@ -73,18 +78,23 @@ public class AgentVolet extends AgentNeoCampus {
         if(isOpenShutter()){
             // on part du principe qu'il n'y a pas besoin ici de tester si on boucle, car on veut dans le pire des cas
             // que le volet soit dans l'état ouvert
-            //TODO
-            // critique, demander a l'interface d'ouvrir notre volet
+            // critique, demander a l'interface d'ouvrir notre volet ( effecteur doit etre front ou back par exemple, le nom du volet )
+            System.out.println("["+effecteur+"][Situation critique]: ouvrir le volet "+effecteur);
+            ListeCommande.leverVolet(effecteur);
         } else if(isCloseShutter()){
             StateVolet nextState = new StateVolet(state);
             nextState.toggleIsOpen();
             if(!nextState.compareStates(this.lastState)) {
-                //TODO
-                // critique, demander a l'interface de fermer notre volet
+                // critique, demander a l'interface de fermer notre
+                System.out.println("["+effecteur+"][Situation critique]: fermer le volet "+effecteur);
+                ListeCommande.baisserVolet(effecteur);
             } else {
                 // on détecte un cas de bouclage : on rollback la valeur de lastState
+                System.out.println("["+effecteur+"][Bouclage]: rollback");
                 lastState = new StateVolet(stateRollback);
             }
+        } else {
+            System.out.println("["+effecteur+"][Situation normale]");
         }
     }
 

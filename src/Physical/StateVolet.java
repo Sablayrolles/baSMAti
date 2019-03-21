@@ -9,6 +9,10 @@ public class StateVolet {
     private boolean isOpen;
 
     public StateVolet() {
+        isBrightOutside = false;
+        isOpen = false;
+        isBrightInside = false;
+        isPresence = false;
     }
 
     //constructeur de copie, pour last state
@@ -51,5 +55,10 @@ public class StateVolet {
                 && (this.isBrightOutside == state.getIsBrightOutside())
                 && (this.isPresence == state.getIsPresence())
                 && (this.isOpen == state.getIsOpen());
+    }
+
+    @Override
+    public String toString() {
+        return "isBrightOutside:"+isBrightOutside+" \nisBrightInside:"+isBrightInside+" \nisPresence:"+isPresence+" \nisOpen:"+isOpen;
     }
 }

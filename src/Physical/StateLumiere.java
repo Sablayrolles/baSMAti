@@ -60,4 +60,9 @@ public class StateLumiere {
                 && (this.isPresence == state.getIsPresence())
                 && (this.isOn == state.getIsOn());
     }
+
+    @Override
+    public String toString() {
+        return "isBrightOutside:"+isBrightOutside+" \nisBrightInside:"+isBrightInside+" \nisPresence:"+isPresence+" \nisOn:"+isOn;
+    }
 }
