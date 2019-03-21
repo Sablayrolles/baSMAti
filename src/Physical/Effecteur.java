@@ -15,36 +15,76 @@ public class Effecteur {
         listeOrdre.add(ordre);
     }
 
-    public static Commande getPremiereOrdre(){
-        Commande ordre = listeOrdre.get(0);
-        listeOrdre.remove(0);
-        return ordre;
+    public static Commande getPremierOrdre(){
+        return listeOrdre.get(0);
     }
+
+    public static void supprimerPremierOrdre(){
+        listeOrdre.remove(0);
+    }
+
+    public static boolean possedeOrdre(){
+        return !listeOrdre.isEmpty();
+    }
+
+    public static String getPayloadString(String dest, String order){
+        return "{\"dest\":\""+dest+"\",\"order\":\""+order+"\"}";
+    }
+
+    public static String getTopicString(String metrique){
+        return "u4/302/"+metrique+"/command";
+    }
+
+
      // Commandes MQTT
 
     // Volets
     public static void statusVolets(){
-        listeOrdre.add(new Commande(TOPIC_VOLETS, COMMANDE_VOLETS_STATUS));
+        Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
+                getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_STATUS));
+        listeOrdre.add(comm);
     }
 
-    public static void leverVolets(){
-        listeOrdre.add(new Commande(TOPIC_VOLETS, COMMANDE_VOLETS_UP));
+    public static void leverTousLesVolets(){
+        Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
+                getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_UP));
+        listeOrdre.add(comm);
     }
 
-    public static void baisserVolets(){
-        listeOrdre.add(new Commande(TOPIC_VOLETS,COMMANDE_VOLETS_DOWN));
+    public static void baisserTousLesVolets(){
+        Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
+                getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_DOWN));
+        listeOrdre.add(comm);
+    }
+
+    public static void leverVolet(String id){
+        Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
+                getPayloadString(id, COMMANDE_VOLETS_UP));
+        listeOrdre.add(comm);
+    }
+
+    public static void baisserVolet(String id){
+        Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
+                getPayloadString(id, COMMANDE_VOLETS_DOWN));
+        listeOrdre.add(comm);
     }
 
     // Lumières
     public static void statusLumieres(){
-        listeOrdre.add(new Commande(TOPIC_LUMIERES,COMMANDE_VOLETS_STATUS));
+        Commande comm = new Commande(getTopicString(TOPIC_LUMIERES),
+                getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_STATUS));
+        listeOrdre.add(comm);
     }
 
     public static void allumerLumieres(){
-        listeOrdre.add(new Commande(TOPIC_LUMIERES,COMMANDE_VOLETS_UP));
+        Commande comm = new Commande(getTopicString(TOPIC_LUMIERES),
+                getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_ON));
+        listeOrdre.add(comm);
     }
 
     public static void eteindreLumieres(){
-        listeOrdre.add(new Commande(TOPIC_LUMIERES,COMMANDE_VOLETS_DOWN));
+        Commande comm = new Commande(getTopicString(TOPIC_LUMIERES),
+                getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_OFF));
+        listeOrdre.add(comm);
     }
 }

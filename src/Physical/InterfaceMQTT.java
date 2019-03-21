@@ -24,6 +24,7 @@ public class InterfaceMQTT implements MqttCallback{
         try {
             MqttClient client = new MqttClient(CONNECTION_URL, clientId, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
+            MqttMessage message;
 
             connOpts.setUserName(USERNAME);
             connOpts.setPassword(PASSWORD.toCharArray());
@@ -35,6 +36,13 @@ public class InterfaceMQTT implements MqttCallback{
             client.setCallback(this);
 
             client.subscribe(SUBSCRIPTION);
+
+            if(Effecteur.possedeOrdre()){
+                message = new MqttMessage();
+                message.setPayload(Effecteur.getPremierOrdre().getPayload().getBytes());
+                client.publish(Effecteur.getPremierOrdre().getTopic(), message);
+                Effecteur.supprimerPremierOrdre();
+            }
 
             //client.disconnect();
             //System.out.println("Disconnected");
