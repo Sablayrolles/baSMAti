@@ -39,14 +39,26 @@ public class InterfaceMQTT implements MqttCallback{
 
             client.subscribe(SUBSCRIPTION);
 
-            //while (true) {
+            // Gets status de démarrage
+
+            // Get des volets
+            message = new MqttMessage();
+            message.setPayload(ListeCommande.getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_STATUS).getBytes());
+            client.publish(ListeCommande.getTopicString(TOPIC_VOLETS), message);
+
+            // Get des lampes
+            message = new MqttMessage();
+            message.setPayload(ListeCommande.getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_STATUS).getBytes());
+            client.publish(ListeCommande.getTopicString(TOPIC_LUMIERES), message);
+
+            /*while (true) {
                 if (ListeCommande.possedeOrdre()) {
                     message = new MqttMessage();
                     message.setPayload(ListeCommande.getPremierOrdre().getPayload().getBytes());
                     client.publish(ListeCommande.getPremierOrdre().getTopic(), message);
                     ListeCommande.supprimerPremierOrdre();
                 }
-            //}
+            }*/
 
             //client.disconnect();
             //System.out.println("Disconnected");
