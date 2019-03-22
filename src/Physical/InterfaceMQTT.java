@@ -39,12 +39,14 @@ public class InterfaceMQTT implements MqttCallback{
 
             client.subscribe(SUBSCRIPTION);
 
-            if(ListeCommande.possedeOrdre()){
-                message = new MqttMessage();
-                message.setPayload(ListeCommande.getPremierOrdre().getPayload().getBytes());
-                client.publish(ListeCommande.getPremierOrdre().getTopic(), message);
-                ListeCommande.supprimerPremierOrdre();
-            }
+            //while (true) {
+                if (ListeCommande.possedeOrdre()) {
+                    message = new MqttMessage();
+                    message.setPayload(ListeCommande.getPremierOrdre().getPayload().getBytes());
+                    client.publish(ListeCommande.getPremierOrdre().getTopic(), message);
+                    ListeCommande.supprimerPremierOrdre();
+                }
+            //}
 
             //client.disconnect();
             //System.out.println("Disconnected");

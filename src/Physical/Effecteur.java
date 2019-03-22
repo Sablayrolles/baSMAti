@@ -1,10 +1,8 @@
 package Physical;
 
 import Enumerations.Constantes;
-import com.sun.org.apache.bcel.internal.classfile.Constant;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 public class Effecteur {
     private static HashMap<String,String> volets;

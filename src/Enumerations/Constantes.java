@@ -11,6 +11,12 @@ public final class Constantes {
     public static final boolean SHOW_STATE = false;
     public static final int TEMPS_MAJ_BD = 1;
 
+    // Connexion serveur MQTT
+    public static final String CONNECTION_URL = "tcp://neocampus.univ-tlse3.fr:1883";
+    public static final String SUBSCRIPTION = "u4/302/#";
+    public static final String USERNAME = "m2dc";
+    public static final String PASSWORD = "m2dc;18";
+
     // Commandes MQTT
 
     public static final String COMMANDE_ALL = "all";
