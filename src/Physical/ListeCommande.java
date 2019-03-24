@@ -27,11 +27,11 @@ public class ListeCommande {
         return !listeOrdre.isEmpty();
     }
 
-    private static String getPayloadString(String dest, String order){
+    public static String getPayloadString(String dest, String order){
         return "{\"dest\":\""+dest+"\",\"order\":\""+order+"\"}";
     }
 
-    private static String getTopicString(String metrique){
+    public static String getTopicString(String metrique){
         return "u4/302/"+metrique+"/command";
     }
 
