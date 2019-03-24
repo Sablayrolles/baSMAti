@@ -4,6 +4,8 @@ import Enumerations.Constantes;
 import fr.irit.smac.amak.Amas;
 import fr.irit.smac.amak.Scheduling;
 
+// Author Michael Geraedts-Muse
+
 public class AmasNeoCampus extends Amas<SalleEnv> {
     AgentLumiere agentLumiere;
     AgentVolet agentVolet1;
@@ -16,6 +18,8 @@ public class AmasNeoCampus extends Amas<SalleEnv> {
 
     @Override
     protected void onInitialAgentsCreation() {
+        //déclaration des differents agents pour la salle U4/302
+        // l'effecteur lumière gère toutes les lumieres de la salle ( sauf tableau ) et n'as donc pas besoin d'un effecteur en parametre
         agentLumiere = new AgentLumiere(this);
         agentVolet1 = new AgentVolet(this, Constantes.VOLETS_BACK);
         agentVolet2 = new AgentVolet(this,Constantes.VOLETS_CENTER);

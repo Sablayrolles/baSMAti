@@ -6,24 +6,28 @@ import Physical.StateLumiere;
 
 import java.util.concurrent.TimeUnit;
 
+// Author Michael Geraedts-Muse
+
 public class AgentLumiere extends AgentNeoCampus{
 
+    //variables d'etat permettant de connaitre l'etat actuel(state)
+    // de savoir si l'utilisateur a modifié l'etat manuellement(lastState)
+    // et dans le cas d'un bouclage de rollback a un etat antérieur (stateRollback)
     private StateLumiere state;
     private StateLumiere lastState;
     private StateLumiere stateRollback;
 
     public AgentLumiere(AmasNeoCampus amas) {
         super(amas);
-        //TODO initialiser les capteurs effecteur suivant MQTT comment c'est plus simple ( dans state )
+        //initialisation des etats
         state = new StateLumiere();
         state.updateValues();
         lastState = new StateLumiere(state);
     }
 
+    //fonction de perception
     @Override
     protected void onPerceive() {
-        // TODO ici on devra interroger l'interface MQTT pour remplir les données liées a nos capteurs
-
         // on sauvegarde, pour le rollback en cas de bouclage le lastState précédent
         stateRollback = new StateLumiere(lastState);
 
@@ -32,26 +36,26 @@ public class AgentLumiere extends AgentNeoCampus{
         if(Constantes.SHOW_STATE) {
             System.out.println("[Lum]State:\n" + state.toString());
         }
-        // On regarde l'etat des capteurs et l'etat de l'effecteur et on remplis les boolens de state ( bright tout ca )
-        // suivant les valeurs brutes ( en lux ) recu de l'interface.
+        // On regarde l'etat des capteurs et l'etat de l'effecteur et on remplis les boolens de state
+        // suivant la comparaison des valeurs brutes ( en lux ) et des seuils recu de l'interface.
         state.updateValues();
-        //System.err.println("Je suis l'agent lumière et je suis en train de percevoir le monde: c'est d'la merde");
     }
 
+    //fonction de décision
     @Override
     protected void onDecideAndAct() {
-        // TODO suivant l'etat actuel et l'etat precedent, mis en place d'une action si besoin est
+
         if(!(lastState.getIsOn() == state.getIsOn())) {
-            // user a override l'état de l'effecteur; il faut donc dormir
+            //si oui: l'utilisateur a override l'état de l'effecteur; il faut donc dormir
             try {
                 TimeUnit.MINUTES.sleep(Constantes.MINUTES_USER_OVERRIDES);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } else {
+            //sinon, on peut agir normalement et décider de l'action a effectuer suivant la table de décision
             decision();
         }
-        //System.err.println("Je suis l'agent lumière et je suis en train de décider ce que je vais faire: rien, de toute facon ca vaut pas le coup");
     }
 
     //##################################################################################################################
@@ -99,10 +103,10 @@ public class AgentLumiere extends AgentNeoCampus{
                 lastState = new StateLumiere(stateRollback);
             }
         } else if (isErrorCase()){
-            //TODO
             // cas impossible: envoyer message d'erreur
             System.err.println("[Lum][Cas impossible]");
         } else {
+            // situation normale
             System.out.println("[Lum][Situation normale]");
         }
     }

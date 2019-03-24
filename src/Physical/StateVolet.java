@@ -1,8 +1,10 @@
 package Physical;
 
+// Author Michael Geraedts-Muse
+
 public class StateVolet {
 
-
+    //variables représentant l'etat des capteurs/effecteurs utile pour les volets
     private boolean isBrightInside;
     private boolean isBrightOutside;
     private boolean isPresence;
@@ -23,12 +25,13 @@ public class StateVolet {
         this.isOpen = state.getIsOpen();
     }
 
+    //met a jout les valeur de l'etat en demandant les nouvelles valeur a l'interface MQTT
     public void updateValues(String effecteur){
         this.isPresence = Capteur.getIsPresence();
         this.isBrightOutside = Capteur.getIsBrightOutside();
         this.isBrightInside = Capteur.getIsBrightInside();
         this.isOpen = Effecteur.getIsOpen(effecteur);
-        //TODO aussi update l'etat du capteur une fois l'interface effecteur fonctionelle
+        //TODO aussi update l'etat de l'effecteur une fois l'interface effecteur fonctionelle
     }
 
     public boolean getIsBrightInside() {
@@ -47,10 +50,12 @@ public class StateVolet {
         return isOpen;
     }
 
+    // sert a modifier l'etat de l'effecteur pour des raisons de test
     public void toggleIsOpen() {
         this.isOpen = ! this.isOpen;
     }
 
+    // fonction de comparaison entre deux StateVolet
     public boolean compareStates(StateVolet state){
         return     (this.isBrightInside == state.getIsBrightInside())
                 && (this.isBrightOutside == state.getIsBrightOutside())
@@ -58,6 +63,7 @@ public class StateVolet {
                 && (this.isOpen == state.getIsOpen());
     }
 
+    //fonction d'affichage
     @Override
     public String toString() {
         return  "|isBrightOutside:"+isBrightOutside+" \n" +
