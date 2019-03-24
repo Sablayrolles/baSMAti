@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import static Enumerations.Constantes.*;
 
+// Author Victor Pinquier
+
 public class ListeCommande {
     private static ArrayList<Commande> listeOrdre;
 

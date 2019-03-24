@@ -8,6 +8,8 @@ import java.util.Date;
 
 import static Enumerations.Constantes.*;
 
+// Author Victor Pinquier
+
 public class InterfaceMQTT implements MqttCallback{
 
     private static final String CONNECTION_URL = "tcp://neocampus.univ-tlse3.fr:1883";

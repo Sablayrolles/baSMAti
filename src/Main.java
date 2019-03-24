@@ -5,6 +5,8 @@ import Physical.Capteur;
 import Physical.InterfaceMQTT;
 import Physical.ListeCommande;
 
+// Author: Michael Geraedts-Muse
+
 public class Main {
     public static void main(String[] args) {
         Capteur cap = new Capteur();

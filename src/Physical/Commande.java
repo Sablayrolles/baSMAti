@@ -1,5 +1,7 @@
 package Physical;
 
+// Author Victor Pinquier
+
 public class Commande {
     private String topic;
     private String payload;

@@ -4,6 +4,9 @@ import Enumerations.Constantes;
 
 import java.util.Date;
 
+// Author Victor Pinquier
+
+
 public class Capteur {
 
     private static boolean [] presence;
@@ -78,6 +81,8 @@ public class Capteur {
         return diffSeconds;
     }
 
+    // Author Michael Geraedts-Muse
+
     /**
      *
      * @return vrai si une présence a été detectée dans la salle il y'a moins de Constantes.SEUIL_TEMPS_PRESENCE_SECONDES
@@ -94,6 +99,10 @@ public class Capteur {
         return getLuminositeExt() >= Constantes.SEUIL_LUM_EXT;
     }
 
+    /**
+     *
+     * @return retourne vrai si la lum interieure est superieur au seuil Constantes.SEUIL_LUM_INT.
+     */
     public static boolean getIsBrightInside(){
         return getLuminositeInt() >= Constantes.SEUIL_LUM_INT;
     }
