@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import static Enumerations.Constantes.*;
 
+// Author Victor Pinquier
+
 /**
  * Cette classe permettait à la base à stocker la liste des ordres à envoyer au serveur MQTT.
  * Mais il y a des soucis au niveau de communication entre les agents
@@ -14,6 +16,7 @@ import static Enumerations.Constantes.*;
  * même client de connexion avec le serveur MQTT, ce qui entraîne une complexité de
  * communication.
  */
+
 public class ListeCommande {
     private static ArrayList<Commande> listeOrdre;
 
