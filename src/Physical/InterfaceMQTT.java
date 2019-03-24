@@ -51,6 +51,7 @@ public class InterfaceMQTT implements MqttCallback{
             message.setPayload(ListeCommande.getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_STATUS).getBytes());
             client.publish(ListeCommande.getTopicString(TOPIC_LUMIERES), message);
 
+            // Permet de traiter les ordres stockés dans la liste "listeOrdre"
             /*while (true) {
                 if (ListeCommande.possedeOrdre()) {
                     message = new MqttMessage();
