@@ -33,7 +33,7 @@ public class Effecteur {
             e.printStackTrace();
         }
         //teste a la valeur mise a jour ? et renvois
-        return lumiere == "ON";
+        return lumiere.equals("ON");
     }
 
     public static boolean getIsOpen(String nom){
@@ -43,7 +43,7 @@ public class Effecteur {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return Effecteur.volets.get(nom) == "OPENED";
+        return Effecteur.volets.get(nom).equals("OPENED");
     }
 
     public static boolean getIsUnknown(String nom){
@@ -53,7 +53,7 @@ public class Effecteur {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return Effecteur.volets.get(nom) == "UNKNOWN";
+        return Effecteur.volets.get(nom).equals("UNKNOWN");
     }
 
     public static void setLumiere(String lumiere) {

@@ -39,6 +39,10 @@ public class Capteur {
         Capteur.datePresence = datePresence;
     }
 
+    /**
+     * Permet d'avoir la moyenne de lux entre les capteurs de luminosités
+     * @return moyenne des lux
+     */
     public static float getLuminositeInt() {
         float sum = 0;
         for(int i : luminositeInt){

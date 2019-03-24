@@ -32,21 +32,31 @@ public final class Constantes {
     // Commandes MQTT
     public static final String COMMANDE_ALL = "all";
 
-    // Volets
+    // VOLETS
+
+    // topic
     public static final String TOPIC_VOLETS = "shutter";
+
+    // noms des ordres
     public static final String COMMANDE_VOLETS_STATUS = "status";
     public static final String COMMANDE_VOLETS_UP = "up";
     public static final String COMMANDE_VOLETS_DOWN = "down";
 
+    // noms des volets
     public static final String VOLETS_FRONT = "front";
     public static final String VOLETS_CENTER = "center";
     public static final String VOLETS_BACK = "back";
 
-    // Lumières
+    // LAMPES
+
+    // topic
     public static final String TOPIC_LUMIERES = "lighting";
+
+    // noms des ordres
     public static final String COMMANDE_LUMIERE_STATUS = "status";
     public static final String COMMANDE_LUMIERE_ON = "on";
     public static final String COMMANDE_LUMIERE_OFF = "off";
 
+    // noms des lampes
     public static final String LUMIERE_OTHERS = "others";
 }

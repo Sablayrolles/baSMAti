@@ -39,30 +39,48 @@ public class ListeCommande {
     // Commandes MQTT
 
     // Volets
+
+    /**
+    * Envoie une demande de status des volets
+     */
     public static void statusVolets(){
         Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
                 getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_STATUS));
         listeOrdre.add(comm);
     }
 
+    /**
+     * Envoie un ordre pour lever tous les volets
+     */
     public static void leverTousLesVolets(){
         Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
                 getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_UP));
         listeOrdre.add(comm);
     }
 
+    /**
+     * Envoie un ordre pour baisser tous les volets
+     */
     public static void baisserTousLesVolets(){
         Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
                 getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_DOWN));
         listeOrdre.add(comm);
     }
 
+    /**
+     * Envoie un ordre pour lever un volet
+     * @param id nom du volet
+     */
     public static void leverVolet(String id){
         Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
                 getPayloadString(id, COMMANDE_VOLETS_UP));
         listeOrdre.add(comm);
     }
 
+    /**
+     * Envoie un ordre pour baisser un volet
+     * @param id nom du volet
+     */
     public static void baisserVolet(String id){
         Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
                 getPayloadString(id, COMMANDE_VOLETS_DOWN));
@@ -70,18 +88,27 @@ public class ListeCommande {
     }
 
     // Lumières
+    /**
+     * Envoie une demande de status des lampes
+     */
     public static void statusLumieres(){
         Commande comm = new Commande(getTopicString(TOPIC_LUMIERES),
                 getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_STATUS));
         listeOrdre.add(comm);
     }
 
+    /**
+     * Envoie un ordre pour allumer les lampes
+     */
     public static void allumerLumieres(){
         Commande comm = new Commande(getTopicString(TOPIC_LUMIERES),
                 getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_ON));
         listeOrdre.add(comm);
     }
 
+    /**
+     * Envoie un ordre pour éteindre les lampes
+     */
     public static void eteindreLumieres(){
         Commande comm = new Commande(getTopicString(TOPIC_LUMIERES),
                 getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_OFF));
