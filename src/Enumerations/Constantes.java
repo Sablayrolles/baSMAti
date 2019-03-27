@@ -21,7 +21,7 @@ public final class Constantes {
     // permet aux agents de print leur state ( pour débug, prend de la place dans la console )
     public static final boolean SHOW_STATE = false;
     //
-    public static final int TEMPS_MAJ_BD = 1;
+    public static final int TEMPS_MAJ_BD = 500;
 
     // Connexion serveur MQTT
     public static final String CONNECTION_URL = "tcp://neocampus.univ-tlse3.fr:1883";
@@ -43,9 +43,9 @@ public final class Constantes {
     public static final String COMMANDE_VOLETS_DOWN = "down";
 
     // noms des volets
-    public static final String VOLETS_FRONT = "front";
-    public static final String VOLETS_CENTER = "center";
-    public static final String VOLETS_BACK = "back";
+    public static final String VOLETS_FRONT = "FRONT";
+    public static final String VOLETS_CENTER = "CENTER";
+    public static final String VOLETS_BACK = "BACK";
 
     // LAMPES
 
@@ -54,8 +54,8 @@ public final class Constantes {
 
     // noms des ordres
     public static final String COMMANDE_LUMIERE_STATUS = "status";
-    public static final String COMMANDE_LUMIERE_ON = "on";
-    public static final String COMMANDE_LUMIERE_OFF = "off";
+    public static final String COMMANDE_LUMIERE_ON = "ON";
+    public static final String COMMANDE_LUMIERE_OFF = "OFF";
 
     // noms des lampes
     public static final String LUMIERE_OTHERS = "others";

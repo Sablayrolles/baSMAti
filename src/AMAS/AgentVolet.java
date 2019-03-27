@@ -21,9 +21,9 @@ public class AgentVolet extends AgentNeoCampus {
         super(amas);
         //initialisation des etats et de l'effecteur
         state = new StateVolet();
+        effecteur = id;
         state.updateValues(effecteur);
         lastState = new StateVolet(state);
-        effecteur = id;
     }
 
     //fonction de perception

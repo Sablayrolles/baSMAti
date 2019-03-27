@@ -49,8 +49,8 @@ public class InterfaceMQTT implements MqttCallback{
 
             // Get des volets
             message = new MqttMessage();
-            message.setPayload(ListeCommande.getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_STATUS).getBytes());
-            client.publish(ListeCommande.getTopicString(TOPIC_VOLETS), message);
+            message.setPayload(ListeCommande.getPayloadString(COMMANDE_ALL,COMMANDE_VOLETS_STATUS).getBytes());
+            client.publish(ListeCommande.getTopicString(TOPIC_VOLETS),message);
 
             // Get des lampes
             message = new MqttMessage();
@@ -118,95 +118,98 @@ public class InterfaceMQTT implements MqttCallback{
         JSONObject obj = new JSONObject(mqttMessage.toString());
         //System.out.println(obj.toString());
 
-        switch (obj.getString("subID")){
-            // Reception des données des capteurs de l'ilot 1
-            case "ilot1":
-                // Capteur luminosité
-                if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
-                    System.out.println("ilot1 lux : " + obj.getInt("value"));
-                    Capteur.setLuminositeInt(0, obj.getInt("value"));
-                }
-                // Capteur présence
-                else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
-                    System.out.println("presence 1 : " + obj.getInt("value"));
-                    boolean val = (obj.getInt("value")==1); // Permet de convertir un int en bool
-                    Capteur.setPresence(0, val);
-                    // Sauvegarde la date de présence
-                    if (!val)
-                        Capteur.setDatePresence(new Date());
-                }
-            break;
-            // Reception des données des capteurs de l'ilot 2
-            case "ilot2":
-                // Capteur luminosité
-                if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
-                    System.out.println("ilot2 lux : " + obj.getInt("value"));
-                    Capteur.setLuminositeInt(1, obj.getInt("value"));
-                }
-                // Capteur présence
-                else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
-                    System.out.println("presence 2 : " + obj.getInt("value"));
-                    boolean val = (obj.getInt("value")==1);
-                    Capteur.setPresence(1, val);
-                    // Sauvegarde la date de présence
-                    if (!val)
-                        Capteur.setDatePresence(new Date());
-                }
-            break;
-            // Reception des données des capteurs de l'ilot 3
-            case "ilot3":
-                // Capteur luminosité
-                if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
-                    System.out.println("ilot3 lux : " + obj.getInt("value"));
-                    Capteur.setLuminositeInt(2, obj.getInt("value"));
-                }
-                // Capteur présence
-                else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
-                    System.out.println("presence 3 : " + obj.getInt("value"));
-                    boolean val = (obj.getInt("value")==1);
-                    Capteur.setPresence(2, val);
-                    // Sauvegarde la date de présence
-                    if (!val)
-                        Capteur.setDatePresence(new Date());
-                }
-            break;
-            // Reception des données du capteur de luminosité exterieur
-            case "ouest":
-                // Conversion de la luminosité de W/m² en lux
-                if(obj.getString("unitID").equals("outside") && obj.getString("value_units").equals("w/m2")) {
-                    System.out.println("exterieur : " + obj.getInt("value") / 0.0079);
-                    Capteur.setLuminositeExt((float) (obj.getInt("value") / 0.0079));
-                    Capteur.getDateDifference();
-                }
-            break;
-        }
-
-        // PARTIE EFFECTEUR
-        if(obj.toMap().containsKey("unitID")) {
-            // Permet de récupérer les status des effecteurs
-            switch (obj.getString("unitID")) {
-                // Volet back
-                case "back":
-                    Effecteur.setVolets(VOLETS_BACK, obj.getString("status"));
-                    System.out.println("back : " + obj.getString("status"));
-                    break;
-                // Volet center
-                case "center":
-                    Effecteur.setVolets(VOLETS_CENTER, obj.getString("status"));
-                    System.out.println("center : " + obj.getString("status"));
-                    break;
-                // Volet front
-                case "front":
-                    Effecteur.setVolets(VOLETS_FRONT, obj.getString("status"));
-                    System.out.println("front : " + obj.getString("status"));
-                    break;
-                // Lampes others
-                case "others":
-                    Effecteur.setLumiere(obj.getString("status"));
-                    System.out.println("other : " + obj.getString("status"));
-                    break;
+        if(obj.toMap().containsKey("subID")) {
+            switch (obj.getString("subID")){
+                // Reception des données des capteurs de l'ilot 1
+                case "ilot1":
+                    // Capteur luminosité
+                    if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
+                        System.out.println("ilot1 lux : " + obj.getInt("value"));
+                        Capteur.setLuminositeInt(0, obj.getInt("value"));
+                    }
+                    // Capteur présence
+                    else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
+                        System.out.println("presence 1 : " + obj.getInt("value"));
+                        boolean val = (obj.getInt("value")==1); // Permet de convertir un int en bool
+                        Capteur.setPresence(0, val);
+                        // Sauvegarde la date de présence
+                        if (!val)
+                            Capteur.setDatePresence(new Date());
+                    }
+                break;
+                // Reception des données des capteurs de l'ilot 2
+                case "ilot2":
+                    // Capteur luminosité
+                    if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
+                        System.out.println("ilot2 lux : " + obj.getInt("value"));
+                        Capteur.setLuminositeInt(1, obj.getInt("value"));
+                    }
+                    // Capteur présence
+                    else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
+                        System.out.println("presence 2 : " + obj.getInt("value"));
+                        boolean val = (obj.getInt("value")==1);
+                        Capteur.setPresence(1, val);
+                        // Sauvegarde la date de présence
+                        if (!val)
+                            Capteur.setDatePresence(new Date());
+                    }
+                break;
+                // Reception des données des capteurs de l'ilot 3
+                case "ilot3":
+                    // Capteur luminosité
+                    if(obj.toMap().containsKey("value_units") && obj.getString("value_units").equals("lux")){
+                        System.out.println("ilot3 lux : " + obj.getInt("value"));
+                        Capteur.setLuminositeInt(2, obj.getInt("value"));
+                    }
+                    // Capteur présence
+                    else if(obj.toMap().containsKey("type") && obj.getString("type").equals("presence")){
+                        System.out.println("presence 3 : " + obj.getInt("value"));
+                        boolean val = (obj.getInt("value")==1);
+                        Capteur.setPresence(2, val);
+                        // Sauvegarde la date de présence
+                        if (!val)
+                            Capteur.setDatePresence(new Date());
+                    }
+                break;
+                // Reception des données du capteur de luminosité exterieur
+                case "ouest":
+                    // Conversion de la luminosité de W/m² en lux
+                    if(obj.getString("unitID").equals("outside") && obj.getString("value_units").equals("w/m2")) {
+                        System.out.println("exterieur : " + obj.getInt("value") / 0.0079);
+                        Capteur.setLuminositeExt((float) (obj.getInt("value") / 0.0079));
+                        Capteur.getDateDifference();
+                    }
+                break;
             }
         }
+
+            // PARTIE EFFECTEUR
+            if(obj.toMap().containsKey("unitID")) {
+                // Permet de récupérer les status des effecteurs
+                switch (obj.getString("unitID")) {
+                    // Volet back
+                    case "back":
+                        Effecteur.setVolets(VOLETS_BACK, obj.getString("status"));
+                        System.out.println("back : " + obj.getString("status"));
+                        break;
+                    // Volet center
+                    case "center":
+                        Effecteur.setVolets(VOLETS_CENTER, obj.getString("status"));
+                        System.out.println("center : " + obj.getString("status"));
+                        break;
+                    // Volet front
+                    case "front":
+                        Effecteur.setVolets(VOLETS_FRONT, obj.getString("status"));
+                        System.out.println("front : " + obj.getString("status"));
+                        break;
+                    // Lampes others
+                    case "others":
+                        Effecteur.setLumiere(obj.getString("status"));
+                        System.out.println("other : " + obj.getString("status"));
+                        break;
+                }
+            }
+
     }
 
     @Override

@@ -12,10 +12,15 @@ public class Effecteur {
 
     public Effecteur() {
         volets = new HashMap<String,String>();
+        lumiere = "";
     }
 
     public static String getVolets(String nom) {
         return Effecteur.volets.get(nom);
+    }
+
+    public static String getAllVolets(){
+        return Effecteur.volets.toString();
     }
 
     public static void setVolets(String nom, String volets) {

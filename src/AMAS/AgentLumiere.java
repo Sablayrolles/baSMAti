@@ -23,6 +23,7 @@ public class AgentLumiere extends AgentNeoCampus{
         state = new StateLumiere();
         state.updateValues();
         lastState = new StateLumiere(state);
+        this.effecteur = Constantes.LUMIERE_OTHERS;
     }
 
     //fonction de perception

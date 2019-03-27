@@ -76,7 +76,7 @@ public class Capteur {
         long diff = (new Date().getTime()) - datePresence.getTime();
         long diffSeconds = diff / 1000;
         long diffMinutes = diff / (60 * 1000);
-        System.out.println("dateDifference"+diffSeconds+" secondes "+ diffMinutes+ " minutes");
+        //System.out.println("dateDifference"+diffSeconds+" secondes "+ diffMinutes+ " minutes");
 
         return diffSeconds;
     }
