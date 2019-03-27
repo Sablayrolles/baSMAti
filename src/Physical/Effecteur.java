@@ -4,6 +4,8 @@ import Enumerations.Constantes;
 
 import java.util.HashMap;
 
+// Author Victor Pinquier
+
 public class Effecteur {
     private static HashMap<String,String> volets;
     private static String lumiere;
@@ -28,32 +30,36 @@ public class Effecteur {
         //demande des status
         ListeCommande.statusLumieres();
         try {
-            Thread.sleep(Constantes.TEMPS_MAJ_BD*3000);
+            Thread.sleep(Constantes.TEMPS_MAJ_BD);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         //teste a la valeur mise a jour ? et renvois
-        return lumiere == "ON";
+        return lumiere.equals("ON");
     }
 
     public static boolean getIsOpen(String nom){
+        //demande des status
         ListeCommande.statusVolets();
         try {
-            Thread.sleep(Constantes.TEMPS_MAJ_BD*3000);
+            Thread.sleep(Constantes.TEMPS_MAJ_BD);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return Effecteur.volets.get(nom) == "OPENED";
+        //teste a la valeur mise a jour ? et renvois
+        return Effecteur.volets.get(nom).equals("OPENED");
     }
 
     public static boolean getIsUnknown(String nom){
+        //demande des status
         ListeCommande.statusVolets();
         try {
-            Thread.sleep(Constantes.TEMPS_MAJ_BD*3000);
+            Thread.sleep(Constantes.TEMPS_MAJ_BD);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return Effecteur.volets.get(nom) == "UNKNOWN";
+        //teste a la valeur mise a jour ? et renvois
+        return Effecteur.volets.get(nom).equals("UNKNOWN");
     }
 
     public static void setLumiere(String lumiere) {

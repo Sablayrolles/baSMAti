@@ -1,5 +1,11 @@
 package Physical;
 
+// Author Victor Pinquier
+
+/**
+ * Chaque commande MQTT est composé d'un topic servant de destinataire (l'effecteur) ainsi que d'un payload qui
+ * est le message JSON contenant une demande de status ou un ordre a l'effecteur.
+ */
 public class Commande {
     private String topic;
     private String payload;

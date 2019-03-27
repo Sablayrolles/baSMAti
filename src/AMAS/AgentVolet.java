@@ -6,25 +6,29 @@ import Physical.StateVolet;
 
 import java.util.concurrent.TimeUnit;
 
+// Author Michael Geraedts-Muse
+
 public class AgentVolet extends AgentNeoCampus {
 
+    //variables d'etat permettant de connaitre l'etat actuel(state)
+    // de savoir si l'utilisateur a modifié l'etat manuellement(lastState)
+    // et dans le cas d'un bouclage de rollback a un etat antérieur (stateRollback)
     private StateVolet state;
     private StateVolet lastState;
     private StateVolet stateRollback;
 
     public AgentVolet(AmasNeoCampus amas, String id) {
         super(amas);
-        //TODO initialiser les capteurs effecteur suivant MQTT comment c'est plus simple ( dans state )
+        //initialisation des etats et de l'effecteur
         state = new StateVolet();
         state.updateValues(effecteur);
         lastState = new StateVolet(state);
         effecteur = id;
     }
 
+    //fonction de perception
     @Override
     protected void onPerceive() {
-        // TODO ici on devra interroger l'interface MQTT pour remplir les données liées a nos capteurs
-
         // on sauvegarde, pour le rollback en cas de bouclage le lastState précédent
         stateRollback = new StateVolet(lastState);
 
@@ -36,12 +40,12 @@ public class AgentVolet extends AgentNeoCampus {
         // On regarde l'etat des capteurs et l'etat de l'effecteur et on remplis les boolens de state ( bright tout ca )
         // suivant les valeurs brutes ( en lux ) recu de l'interface.
         state.updateValues(effecteur);
-        //System.err.println("Je suis l'agent volet et je suis en train de percevoir le monde: c'est d'la merde");
     }
 
+    //fonction de décision
     @Override
     protected void onDecideAndAct() {
-        // TODO suivant l'etat actuel et l'etat precedent, mis en place d'une action si besoin est
+        // suivant l'etat actuel et l'etat precedent, mis en place d'une action si besoin est
         if(!(lastState.getIsOpen() == state.getIsOpen())) {
             // user a override l'état de l'effecteur; il faut donc dormir
             try {
@@ -50,9 +54,9 @@ public class AgentVolet extends AgentNeoCampus {
                 e.printStackTrace();
             }
         } else {
+            //sinon, on peut agir normalement et décider de l'action a effectuer suivant la table de décision
             decision();
         }
-        //System.err.println("Je suis l'agent volet et je suis en train de décider ce que je vais faire: rien, de toute facon ca vaut pas le coup... -_-");
     }
 
     //##################################################################################################################
@@ -94,6 +98,7 @@ public class AgentVolet extends AgentNeoCampus {
                 lastState = new StateVolet(stateRollback);
             }
         } else {
+            // la situation est normale
             System.out.println("["+effecteur+"][Situation normale]");
         }
     }

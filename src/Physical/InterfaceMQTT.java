@@ -9,6 +9,8 @@ import java.util.Date;
 
 import static Enumerations.Constantes.*;
 
+// Author Victor Pinquier
+
 public class InterfaceMQTT implements MqttCallback{
 
     private static final String CONNECTION_URL = "tcp://neocampus.univ-tlse3.fr:1883";
@@ -43,14 +45,27 @@ public class InterfaceMQTT implements MqttCallback{
 
             client.subscribe(SUBSCRIPTION);
 
-            //while (true) {
+            // Gets status de démarrage
+
+            // Get des volets
+            message = new MqttMessage();
+            message.setPayload(ListeCommande.getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_STATUS).getBytes());
+            client.publish(ListeCommande.getTopicString(TOPIC_VOLETS), message);
+
+            // Get des lampes
+            message = new MqttMessage();
+            message.setPayload(ListeCommande.getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_STATUS).getBytes());
+            client.publish(ListeCommande.getTopicString(TOPIC_LUMIERES), message);
+
+            // Permet de traiter les ordres stockés dans la liste "listeOrdre"
+            /*while (true) {
                 if (ListeCommande.possedeOrdre()) {
                     message = new MqttMessage();
                     message.setPayload(ListeCommande.getPremierOrdre().getPayload().getBytes());
                     client.publish(ListeCommande.getPremierOrdre().getTopic(), message);
                     ListeCommande.supprimerPremierOrdre();
                 }
-            //}
+            }*/
 
             //client.disconnect();
             //System.out.println("Disconnected");
@@ -166,21 +181,26 @@ public class InterfaceMQTT implements MqttCallback{
             break;
         }
 
+        // PARTIE EFFECTEUR
         if(obj.toMap().containsKey("unitID")) {
             // Permet de récupérer les status des effecteurs
             switch (obj.getString("unitID")) {
+                // Volet back
                 case "back":
                     Effecteur.setVolets(VOLETS_BACK, obj.getString("status"));
                     System.out.println("back : " + obj.getString("status"));
                     break;
+                // Volet center
                 case "center":
                     Effecteur.setVolets(VOLETS_CENTER, obj.getString("status"));
                     System.out.println("center : " + obj.getString("status"));
                     break;
+                // Volet front
                 case "front":
                     Effecteur.setVolets(VOLETS_FRONT, obj.getString("status"));
                     System.out.println("front : " + obj.getString("status"));
                     break;
+                // Lampes others
                 case "others":
                     Effecteur.setLumiere(obj.getString("status"));
                     System.out.println("other : " + obj.getString("status"));
