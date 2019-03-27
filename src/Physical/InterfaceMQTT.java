@@ -3,6 +3,7 @@ package Physical;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.json.JSONObject;
+import java.sql.Timestamp;
 
 import java.util.Date;
 
@@ -15,6 +16,9 @@ public class InterfaceMQTT implements MqttCallback{
     private static final String USERNAME = "m2dc";
     private static final String PASSWORD = "m2dc;18";
 
+    private MqttClient client;
+    private MqttConnectOptions connOpts;
+
     public InterfaceMQTT() {
     }
 
@@ -24,8 +28,8 @@ public class InterfaceMQTT implements MqttCallback{
         MemoryPersistence persistence = new MemoryPersistence();
 
         try {
-            MqttClient client = new MqttClient(CONNECTION_URL, clientId, persistence);
-            MqttConnectOptions connOpts = new MqttConnectOptions();
+            client = new MqttClient(CONNECTION_URL, clientId, persistence);
+            connOpts = new MqttConnectOptions();
             MqttMessage message;
 
             connOpts.setUserName(USERNAME);
@@ -59,6 +63,33 @@ public class InterfaceMQTT implements MqttCallback{
             System.out.println("excep "+me);
             me.printStackTrace();
         }
+    }
+
+    /**
+     *
+     * @deprecated
+     */
+    public void publish(String topicName, int qos, byte[] payload) throws MqttException {
+
+        // Connect to the MQTT server
+        System.out.println("Connecting to "+CONNECTION_URL + " with client ID "+client.getClientId());
+        client.connect(connOpts);
+        System.out.println("Connected");
+
+        String time = new Timestamp(System.currentTimeMillis()).toString();
+        System.out.println("Publishing at: "+time+ " to topic \""+topicName+"\" qos "+qos);
+
+        // Create and configure a message
+        MqttMessage message = new MqttMessage(payload);
+        message.setQos(qos);
+
+        // Send the message to the server, control is not returned until
+        // it has been delivered to the server meeting the specified
+        // quality of service.
+        client.publish(topicName, message);
+
+        // Disconnect the client
+        client.disconnect();
     }
 
     @Override

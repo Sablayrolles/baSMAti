@@ -39,7 +39,7 @@ public class ListeCommande {
     // Commandes MQTT
 
     // Volets
-    public static void statusVolets(){
+    public static void statusVolets() {
         Commande comm = new Commande(getTopicString(TOPIC_VOLETS),
                 getPayloadString(COMMANDE_ALL, COMMANDE_VOLETS_STATUS));
         listeOrdre.add(comm);
@@ -70,7 +70,7 @@ public class ListeCommande {
     }
 
     // Lumières
-    public static void statusLumieres(){
+    public static void statusLumieres() {
         Commande comm = new Commande(getTopicString(TOPIC_LUMIERES),
                 getPayloadString(COMMANDE_ALL, COMMANDE_LUMIERE_STATUS));
         listeOrdre.add(comm);
